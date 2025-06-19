@@ -1,0 +1,262 @@
+// AdminHeader component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  width: 100%;
+  
+  // Glass morphism background
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  transition: all 0.3s ease;
+}
+
+.header.light {
+  background: rgba(248, 250, 253, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(232, 237, 245, 0.8);
+  box-shadow: 0 2px 10px rgba(22, 111, 227, 0.05);
+}
+
+.header.dark {
+  background: rgba(15, 26, 53, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(45, 58, 92, 0.8);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 100%;
+}
+
+// Left side
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menuToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  gap: 0.25rem;
+}
+
+.menuToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header.light .menuToggle:hover {
+  background: rgba(22, 111, 227, 0.08);
+}
+
+.header.dark .menuToggle:hover {
+  background: rgba(79, 155, 255, 0.1);
+}
+
+.hamburger {
+  width: 1.25rem;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: all 0.2s ease;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pageTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumbItem {
+  color: var(--text-secondary);
+}
+
+.breadcrumbSeparator {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+// Right side
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header.light .themeToggle:hover {
+  background: rgba(22, 111, 227, 0.08);
+}
+
+.header.dark .themeToggle:hover {
+  background: rgba(79, 155, 255, 0.1);
+}
+
+.themeIcon {
+  position: absolute;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.themeIcon.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.themeIcon.inactive {
+  opacity: 0;
+  transform: scale(0) rotate(180deg);
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.userSection:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.userAvatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.userName {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+.userRole {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+// Focus styles
+.menuToggle:focus-visible,
+.themeToggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 1rem;
+  }
+  
+  .pageTitle {
+    font-size: 1.25rem;
+  }
+  
+  .breadcrumb {
+    display: none;
+  }
+  
+  .userInfo {
+    display: none;
+  }
+  
+  .userSection {
+    padding: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContent {
+    padding: 0.75rem;
+  }
+  
+  .headerLeft {
+    gap: 0.75rem;
+  }
+  
+  .headerRight {
+    gap: 0.5rem;
+  }
+  
+  .pageTitle {
+    font-size: 1.1rem;
+  }
+}
+
+// Desktop layout - hide menu toggle
+@media (min-width: 1024px) {
+  .menuToggle {
+    display: none;
+  }
+}

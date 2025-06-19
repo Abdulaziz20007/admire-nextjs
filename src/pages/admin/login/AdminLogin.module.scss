@@ -1,0 +1,368 @@
+// AdminLogin component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.loginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: transparent;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.loginPage.light {
+  color: var(--text-primary);
+}
+
+.loginPage.dark {
+  color: var(--text-primary);
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// Header with logo and theme toggle
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  height: 2.5rem;
+  width: auto;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoMain {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+}
+
+.logoSecondary {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: -0.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+
+.themeToggle {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.loginPage.light .themeToggle:hover {
+  background: rgba(22, 111, 227, 0.08);
+}
+
+.loginPage.dark .themeToggle:hover {
+  background: rgba(79, 155, 255, 0.1);
+}
+
+.themeIcon {
+  position: absolute;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.themeIcon.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.themeIcon.inactive {
+  opacity: 0;
+  transform: scale(0) rotate(180deg);
+}
+
+// Login Card
+.card {
+  padding: 2.5rem;
+  border-radius: 16px;
+
+  // Glass morphism effect
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3s ease;
+}
+
+.loginPage.light .card {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(22, 111, 227, 0.1);
+  box-shadow: 0 10px 30px rgba(22, 111, 227, 0.08);
+}
+
+.loginPage.dark .card {
+  background: rgba(20, 30, 50, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+// Form
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.loginPage.light .input {
+  border: 1px solid rgba(22, 111, 227, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.loginPage.dark .input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 30, 50, 0.15);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(79, 155, 255, 0.1);
+}
+
+.loginPage.light .input:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.loginPage.dark .input:focus {
+  background: rgba(20, 30, 50, 0.25);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+// Button
+.button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(79, 155, 255, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Error handling
+.errorContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.errorIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
+}
+
+// Focus styles
+.themeToggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .loginPage {
+    padding: 1.5rem;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .logoMain {
+    font-size: 1.4rem;
+  }
+
+  .logoSecondary {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginPage {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .input,
+  .button {
+    padding: 0.875rem 1rem;
+  }
+
+  .logoIcon {
+    height: 2rem;
+  }
+
+  .logoMain {
+    font-size: 1.2rem;
+  }
+
+  .logoSecondary {
+    font-size: 0.65rem;
+  }
+}

@@ -1,0 +1,257 @@
+// GlobalBackground component styles
+// Following the existing project patterns for SCSS modules
+
+// Variables
+$transition-duration: 0.3s;
+$z-index-background: -1;
+$z-index-dots: 1;
+$z-index-stars: 2;
+
+// Mixins
+@mixin full-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@mixin canvas-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// Main background container
+.globalBackground {
+  @include full-viewport;
+  background: var(--global-bg);
+  z-index: $z-index-background;
+  transition: background-color $transition-duration ease;
+
+  // Ensure it stays behind all content
+  will-change: background-color;
+
+  // Performance optimizations
+  transform: translateZ(0); // Force hardware acceleration
+  backface-visibility: hidden;
+}
+
+// Theme support is now handled via CSS custom properties
+// The background automatically switches based on --global-bg variable
+
+// Theme classes for component state management
+.globalBackground.light {
+  // Light theme specific styles if needed
+}
+
+.globalBackground.dark {
+  // Dark theme specific styles if needed
+}
+
+// Animation state
+.globalBackground.animated {
+  // Animation ready state
+}
+
+.globalBackground.transitioning {
+  // Theme transition state
+}
+
+// Dots canvas
+.dotsCanvas {
+  @include canvas-base;
+  z-index: $z-index-dots;
+  opacity: 0.6;
+  transition: opacity $transition-duration ease;
+
+  // Animation performance optimizations
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+// Stars canvas
+.starsCanvas {
+  @include canvas-base;
+  z-index: $z-index-stars;
+  opacity: 0.8;
+  transition: opacity $transition-duration ease;
+
+  // Animation performance optimizations
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dotsCanvas {
+    opacity: 0.4; // Reduce opacity on mobile for better performance
+  }
+
+  .starsCanvas {
+    opacity: 0.6; // Reduce opacity on mobile for better performance
+  }
+}
+
+@media (max-width: 480px) {
+  .dotsCanvas {
+    opacity: 0.3; // Further reduce on small screens
+  }
+
+  .starsCanvas {
+    opacity: 0.5; // Further reduce on small screens
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .globalBackground {
+    // Disable animations for users who prefer reduced motion
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  .dotsCanvas,
+  .starsCanvas {
+    opacity: 0.2; // Static, low opacity background
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .globalBackground {
+    background: #000000; // Pure black for high contrast
+  }
+
+  .dotsCanvas,
+  .starsCanvas {
+    opacity: 0.1; // Very subtle in high contrast mode
+  }
+}
+
+// Print styles (hide background for printing)
+@media print {
+  .globalBackground {
+    display: none;
+  }
+}
+
+// Focus and interaction states (for accessibility)
+.globalBackground:focus-within {
+  // Ensure background doesn't interfere with focus indicators
+  .dotsCanvas,
+  .starsCanvas {
+    opacity: 0.3;
+  }
+}
+
+// Animation keyframes for potential CSS-based fallbacks
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Fallback styles for browsers that don't support canvas
+.globalBackground {
+  // CSS-only fallback background (background-image removed - now handled by .dotContainer)
+  background-size: 200px 200px, 300px 300px, 250px 250px, 180px 180px;
+  background-position: 0 0, 50px 50px, 100px 100px, 150px 150px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+// Canvas support detection
+.globalBackground canvas {
+  // Hide fallback when canvas is supported
+  ~ * {
+    display: none;
+  }
+}
+
+// Dot Pattern Styles
+.dotContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-size: 50px 50px; // Larger gaps between dots
+  background-attachment: fixed; // Keeps dots fixed during zoom
+  opacity: 0; // Start invisible for animation
+  transition: all 0.5s ease;
+}
+
+// Animation when dots become visible
+.dotContainer.animated {
+  opacity: 0.9;
+}
+
+.dotContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-attachment: fixed; // Keeps before element dots fixed during zoom
+}
+
+// Light theme dots
+.dotContainer.light {
+  background-image: radial-gradient(#dadde8 1.5px, transparent 1.5px);
+}
+
+// Dark theme dots
+.dotContainer.dark {
+  background-image: radial-gradient(#2d3a5c 1.5px, transparent 1.5px);
+}
+
+// Theme transition animations
+.dotContainer.transitioning.light::before {
+  background-image: radial-gradient(#2d3a5c 1.5px, transparent 1.5px);
+  background-size: 50px 50px;
+  background-attachment: fixed; // Consistency with main pattern
+  opacity: 1;
+  animation: dotFadeOut 0.3s ease forwards;
+}
+
+.dotContainer.transitioning.dark::before {
+  background-image: radial-gradient(#dadde8 1.5px, transparent 1.5px);
+  background-size: 50px 50px;
+  background-attachment: fixed; // Consistency with main pattern
+  opacity: 1;
+  animation: dotFadeOut 0.3s ease forwards;
+}
+
+@keyframes dotFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

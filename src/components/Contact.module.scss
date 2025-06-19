@@ -1,0 +1,667 @@
+// Contact/Location section styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.locationSection {
+  padding: 0 0 8rem 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+
+  // Transparent background to show GlobalBackground pattern
+  background: transparent;
+  color: var(--text-primary);
+
+  // Smooth transitions for theme changes
+  transition: color 0.5s ease;
+}
+
+.locationSection.light {
+  color: #031040;
+}
+
+.locationSection.dark {
+  color: #f0f2f8;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+.wideContainer {
+  max-width: 1400px !important;
+  width: 100%;
+}
+
+.locationHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.sectionTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.locationSection.light .sectionTitle {
+  color: #031040;
+}
+
+.locationContentWrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.locationMapContainer {
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+}
+
+.locationMap {
+  height: 650px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(20, 30, 50, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(22, 111, 227, 0.05);
+  transition: all 0.4s ease-in-out;
+  flex: 1;
+}
+
+.locationMap:hover {
+  box-shadow: 0 15px 30px rgba(22, 111, 227, 0.15),
+    0 10px 10px rgba(0, 0, 0, 0.1), inset 0 -8px 15px rgba(22, 111, 227, 0.1),
+    0 0 20px rgba(79, 155, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.locationSection.light .locationMap {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(22, 111, 227, 0.05);
+  box-shadow: 0 10px 20px rgba(22, 111, 227, 0.05),
+    0 6px 6px rgba(22, 111, 227, 0.05),
+    inset 0 -5px 10px rgba(255, 255, 255, 0.1);
+}
+
+.locationSection.light .locationMap:hover {
+  box-shadow: 0 15px 30px rgba(22, 111, 227, 0.1),
+    0 10px 10px rgba(22, 111, 227, 0.08),
+    inset 0 -8px 15px rgba(255, 255, 255, 0.15),
+    0 0 20px rgba(79, 155, 255, 0.15);
+  border-color: rgba(22, 111, 227, 0.1);
+}
+
+.locationContact {
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card toggle buttons */
+.cardToggleButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 5;
+}
+
+.toggleBtn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: rgba(20, 30, 50, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  font-size: 1.1rem; // Increased from default for better readability
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 0 5px;
+}
+
+.toggleBtn.active {
+  background: linear-gradient(135deg, #4f9bff, #2d78e0);
+  color: white;
+  box-shadow: 0 4px 8px rgba(22, 111, 227, 0.25);
+}
+
+.locationSection.light .toggleBtn {
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(3, 16, 64, 0.7);
+}
+
+.locationSection.light .toggleBtn.active {
+  background: linear-gradient(135deg, #4f9bff, #2d78e0);
+  color: white;
+}
+
+/* Flip card container */
+.flipCardContainer {
+  flex: 1;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: center center;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.flipCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+.flipCardContainer.showAddress .flipCard {
+  transform: rotateY(180deg);
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.flipCardFront {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.flipCardBack {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Additional rules to ensure proper hiding */
+.flipCardContainer:not(.showAddress) .flipCardBack {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flipCardContainer.showAddress .flipCardFront {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ensure smooth transitions for visibility */
+.flipCardFront,
+.flipCardBack {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+/* Contact form styling */
+.contactFormContainer {
+  background: rgba(20, 30, 50, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 3.5rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(22, 111, 227, 0.05);
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+.contactFormContainer:hover {
+  box-shadow: 0 15px 30px rgba(22, 111, 227, 0.15),
+    0 10px 10px rgba(0, 0, 0, 0.1), inset 0 -8px 15px rgba(22, 111, 227, 0.1),
+    0 0 20px rgba(79, 155, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.locationSection.light .contactFormContainer {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(22, 111, 227, 0.1);
+  box-shadow: 0 20px 40px rgba(22, 111, 227, 0.1),
+    0 10px 20px rgba(79, 155, 255, 0.15), 0 5px 10px rgba(22, 111, 227, 0.05),
+    inset 0 -5px 10px rgba(255, 255, 255, 0.2);
+}
+
+.locationSection.light .contactFormContainer:hover {
+  box-shadow: 0 25px 50px rgba(22, 111, 227, 0.15),
+    0 15px 30px rgba(79, 155, 255, 0.2), 0 8px 15px rgba(22, 111, 227, 0.1),
+    inset 0 -8px 15px rgba(255, 255, 255, 0.25),
+    0 0 20px rgba(79, 155, 255, 0.2);
+  border-color: rgba(22, 111, 227, 0.2);
+}
+
+.contactTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.75rem;
+  color: #ffffff;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.locationSection.light .contactTitle {
+  color: #031040;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.formGroup label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.locationSection.light .formGroup label {
+  color: rgba(3, 16, 64, 0.8);
+}
+
+.formGroup input {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.locationSection.light .formGroup input {
+  border: 1px solid rgba(22, 111, 227, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+  color: #031040;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #4f9bff;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(79, 155, 255, 0.2);
+}
+
+.locationSection.light .formGroup input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 3px rgba(79, 155, 255, 0.2);
+}
+
+.formGroup input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.locationSection.light .formGroup input::placeholder {
+  color: rgba(3, 16, 64, 0.4);
+}
+
+.contactSubmitBtn {
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #4f9bff, #2d78e0);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(22, 111, 227, 0.25);
+}
+
+.contactSubmitBtn:hover {
+  background: linear-gradient(135deg, #5aa5ff, #3885ed);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(22, 111, 227, 0.3);
+}
+
+.contactSubmitBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(22, 111, 227, 0.2);
+}
+
+.contactSubmitBtn:disabled {
+  background: linear-gradient(135deg, #6b9fd8, #547cad);
+  cursor: not-allowed;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(22, 111, 227, 0.15);
+  opacity: 0.7;
+}
+
+.formSuccessMessage {
+  background: rgba(46, 204, 113, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #2ecc71;
+  font-weight: 500;
+  margin: 3rem 0;
+  animation: fadeIn 0.3s ease forwards;
+  font-size: 1.1rem;
+}
+
+.locationSection.light .formSuccessMessage {
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+}
+
+/* Address container styling */
+.addressContainer {
+  background: rgba(20, 30, 50, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(22, 111, 227, 0.05);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+.locationSection.light .addressContainer {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(22, 111, 227, 0.1);
+  box-shadow: 0 20px 40px rgba(22, 111, 227, 0.1),
+    0 10px 20px rgba(79, 155, 255, 0.15), 0 5px 10px rgba(22, 111, 227, 0.05),
+    inset 0 -5px 10px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+
+.locationSection.light .addressContainer:hover {
+  box-shadow: 0 25px 50px rgba(22, 111, 227, 0.15),
+    0 15px 30px rgba(79, 155, 255, 0.2), 0 8px 15px rgba(22, 111, 227, 0.1),
+    inset 0 -8px 15px rgba(255, 255, 255, 0.25),
+    0 0 20px rgba(79, 155, 255, 0.2);
+  border-color: rgba(22, 111, 227, 0.2);
+}
+
+.addressImage {
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+}
+
+.addressImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.addressImage:hover img {
+  transform: scale(1.05);
+}
+
+.addressDetails {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.addressItem {
+  margin-bottom: 0.5rem;
+}
+
+.addressItem h4 {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.2rem;
+  color: #4f9bff;
+  margin-bottom: 0.7rem;
+}
+
+.locationSection.light .addressItem h4 {
+  color: #2d78e0;
+}
+
+.addressItem p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin: 0.4rem 0;
+  line-height: 1.5;
+}
+
+.locationSection.light .addressItem p {
+  color: rgba(3, 16, 64, 0.9);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1200px) {
+  .locationContentWrapper {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .locationContentWrapper {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .locationMapContainer,
+  .locationContact {
+    height: 600px;
+  }
+
+  .locationMap {
+    height: 600px;
+  }
+
+  .contactFormContainer {
+    padding: 1.5rem;
+  }
+
+  .contactTitle {
+    margin-bottom: 1.5rem;
+  }
+
+  // .addressImage {
+  //   height: 35%;
+  // }
+}
+
+@media (max-width: 768px) {
+  .locationSection {
+    padding: 6rem 0 4rem;
+    min-height: auto;
+  }
+
+  .locationContentWrapper {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .locationMapContainer,
+  .locationContact {
+    height: auto;
+  }
+
+  .locationMapContainer {
+    height: 500px;
+  }
+
+  .locationMap {
+    height: 500px;
+  }
+
+  .locationContact {
+    height: 600px;
+  }
+
+  .toggleBtn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.05rem; // Increased from 0.95rem for better readability on tablet
+  }
+
+  .contactFormContainer {
+    padding: 1.5rem;
+  }
+
+  .contactTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contactForm {
+    gap: 1.5rem;
+  }
+
+  .formGroup label {
+    font-size: 0.95rem;
+  }
+
+  .formGroup input {
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+  }
+
+  .contactSubmitBtn {
+    padding: 0.9rem 1.25rem;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  // .addressImage {
+  //   height: 25%;
+  // }
+
+  .addressDetails {
+    padding: 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .addressItem h4 {
+    font-size: 1rem;
+  }
+
+  .addressItem p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .locationSection {
+    padding: 4rem 0 2rem;
+  }
+
+  .locationMap {
+    height: 400px;
+  }
+
+  .toggleBtn {
+    padding: 0.6rem 1rem;
+    font-size: 1rem; // Increased from 0.9rem for better readability on mobile
+  }
+
+  .contactFormContainer {
+    padding: 1.25rem;
+  }
+
+  .contactTitle {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .formGroup {
+    gap: 0.5rem;
+  }
+
+  .formGroup label {
+    font-size: 0.9rem;
+  }
+
+  .formGroup input {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .contactSubmitBtn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+    margin-top: 1.25rem;
+  }
+
+  // .addressImage {
+  //   height: 22%;
+  // }
+
+  .addressDetails {
+    padding: 1rem;
+    gap: 0.4rem;
+  }
+
+  .addressItem {
+    margin-bottom: 0.25rem;
+  }
+
+  .addressItem h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .addressItem p {
+    font-size: 0.85rem;
+    margin: 0.2rem 0;
+  }
+}

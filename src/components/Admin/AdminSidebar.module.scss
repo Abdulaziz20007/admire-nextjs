@@ -1,0 +1,458 @@
+// AdminSidebar component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 280px;
+  position: relative;
+
+  // Glass morphism background
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible; // Allow toggle button to extend outside
+  z-index: 1000;
+}
+
+// Collapsed state
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar.light {
+  background: rgba(248, 250, 253, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(232, 237, 245, 0.8);
+  box-shadow: 2px 0 10px rgba(22, 111, 227, 0.05);
+}
+
+.sidebar.dark {
+  background: rgba(15, 26, 53, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(45, 58, 92, 0.8);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+// Mobile sidebar animation
+.sidebar {
+  transform: translateX(-100%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+// Sidebar Header
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 80px;
+  position: relative;
+  overflow: visible; // Allow toggle button to extend outside
+}
+
+.sidebar.collapsed .sidebarHeader {
+  padding: 1.5rem 0.75rem;
+  justify-content: center;
+}
+
+.sidebar.light .sidebarHeader {
+  border-bottom: 1px solid rgba(232, 237, 245, 0.5);
+}
+
+.sidebar.dark .sidebarHeader {
+  border-bottom: 1px solid rgba(45, 58, 92, 0.5);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .logo {
+  gap: 3rem; // Increased gap pushes text outside 80px width
+  justify-content: center;
+}
+
+.logoIcon {
+  height: 2rem;
+  width: auto;
+  flex-shrink: 0; // Prevent icon from shrinking
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  white-space: nowrap; // Prevent text wrapping
+  transition: opacity 0.2s ease 0.1s; // Slight delay for smoother effect
+}
+
+.sidebar.collapsed .logoText {
+  opacity: 0;
+  transition: opacity 0.1s ease; // Faster fade out
+}
+
+.logoMain {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+}
+
+.logoSecondary {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-top: -0.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+
+.collapseToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--primary);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+
+  // Badge-style positioning spanning across sidebar border
+  position: absolute;
+  top: 50%;
+  right: -1.25rem; // Half the button width to center on border
+  transform: translateY(-50%);
+  z-index: 1002; // Above sidebar and other elements
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.light .collapseToggle {
+  background: var(--primary);
+  border: 2px solid rgba(248, 250, 253, 0.9);
+  box-shadow: 0 2px 8px rgba(22, 111, 227, 0.2);
+}
+
+.sidebar.dark .collapseToggle {
+  background: var(--primary);
+  border: 2px solid rgba(15, 26, 53, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.collapseToggle:hover {
+  background: var(--primary-hover);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+// Navigation
+.navigation {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  overflow-x: hidden; // Hide text that slides out horizontally
+}
+
+.navContainer {
+  overflow: hidden; // Hide text that slides out of view
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  margin: 0.25rem 0;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease, gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0;
+  position: relative;
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .navLink {
+  gap: 3rem; // Increased gap pushes text outside 80px width
+  justify-content: flex-start;
+  padding: 0.75rem;
+  padding-left: calc(
+    (80px - 2rem) / 2
+  ); // Center the larger icon in collapsed state
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.sidebar.light .navLink:hover {
+  background: rgba(22, 111, 227, 0.08);
+}
+
+.sidebar.dark .navLink:hover {
+  background: rgba(79, 155, 255, 0.1);
+}
+
+.navLink.active {
+  background: rgba(22, 111, 227, 0.15);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.navLink.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary);
+}
+
+.navIcon {
+  font-size: 1.5rem; // Even larger icons for better visibility
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  flex-shrink: 0; // Prevent icon from shrinking
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLabel {
+  flex: 1;
+  white-space: nowrap; // Prevent text wrapping
+  transition: opacity 0.2s ease 0.1s; // Slight delay for smoother effect
+}
+
+.sidebar.collapsed .navLabel {
+  opacity: 0;
+  transition: opacity 0.1s ease; // Faster fade out
+}
+
+.navBadge {
+  background: var(--primary);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  min-width: 1.2rem;
+  text-align: center;
+}
+
+// Sidebar Footer
+.sidebarFooter {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  transition: padding 0.3s ease;
+}
+
+.sidebar.collapsed .sidebarFooter {
+  padding: 1rem 0.75rem;
+}
+
+.sidebar.light .sidebarFooter {
+  border-top: 1px solid rgba(232, 237, 245, 0.5);
+}
+
+.sidebar.dark .sidebarFooter {
+  border-top: 1px solid rgba(45, 58, 92, 0.5);
+}
+
+// Footer Controls
+.footerControls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  transition: flex-direction 0.3s ease;
+}
+
+.sidebar.collapsed .footerControls {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease, gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .logoutButton {
+  gap: 3rem; // Increased gap pushes text outside 80px width
+  justify-content: center;
+  padding: 0.75rem;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.sidebar.light .logoutButton {
+  border: 1px solid rgba(232, 237, 245, 0.8);
+}
+
+.sidebar.dark .logoutButton {
+  border: 1px solid rgba(45, 58, 92, 0.8);
+}
+
+.logoutButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.logoutIcon {
+  font-size: 1rem;
+  flex-shrink: 0; // Prevent icon from shrinking
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoutText {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap; // Prevent text wrapping
+  transition: opacity 0.2s ease 0.1s; // Slight delay for smoother effect
+}
+
+.sidebar.collapsed .logoutText {
+  opacity: 0;
+  transition: opacity 0.1s ease; // Faster fade out
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+  flex-shrink: 0; // Prevent button from shrinking
+}
+
+.sidebar.light .themeToggle {
+  border: 1px solid rgba(232, 237, 245, 0.8);
+}
+
+.sidebar.dark .themeToggle {
+  border: 1px solid rgba(45, 58, 92, 0.8);
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.sidebar.light .themeToggle:hover {
+  background: rgba(22, 111, 227, 0.08);
+}
+
+.sidebar.dark .themeToggle:hover {
+  background: rgba(79, 155, 255, 0.1);
+}
+
+// Desktop layout
+@media (min-width: 1024px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .collapseToggle {
+    display: flex;
+  }
+
+  .closeButton {
+    display: none;
+  }
+}
+
+// Mobile layout
+@media (max-width: 767px) {
+  .sidebar {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .closeButton {
+    display: flex;
+  }
+}

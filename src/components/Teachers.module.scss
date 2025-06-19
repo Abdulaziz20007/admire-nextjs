@@ -1,0 +1,571 @@
+// Teachers/Staff section styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.staffSection {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  // Transparent background to show GlobalBackground pattern
+  background: transparent;
+  color: var(--text-primary);
+
+  // Smooth transitions for theme changes
+  transition: color 0.5s ease;
+}
+
+.staffSection.light {
+  color: #031040;
+}
+
+.staffSection.dark {
+  color: #f0f2f8;
+}
+
+/* Content Wrapper */
+.staffContentWrapper {
+  padding: 3rem;
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: all 0.4s ease-in-out;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+/* Header styles */
+.staffHeader {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.sectionDescription {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+.staffSection.light .sectionTitle {
+  color: #031040;
+}
+
+.staffSection.light .sectionDescription {
+  color: rgba(3, 16, 64, 0.8);
+}
+
+/* Teacher avatars row at the top */
+.teachersAvatarsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.teacherAvatar {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 80px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.teacherAvatar.active {
+  width: 100px;
+}
+
+.avatarWrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  filter: grayscale(30%);
+  opacity: 0.8;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 0 auto;
+  padding: 7px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.teacherAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.teacherAvatar:hover .avatarWrapper {
+  filter: grayscale(0%);
+  opacity: 1;
+  box-shadow: 0 0 15px rgba(79, 155, 255, 0.6), 0 0 30px rgba(22, 111, 227, 0.3);
+}
+
+.teacherAvatar.active .avatarWrapper {
+  width: 100px;
+  height: 100px;
+  filter: grayscale(0%);
+  opacity: 1;
+  border: 3px solid #4f9bff;
+  box-shadow: 0 0 20px rgba(79, 155, 255, 0.8), 0 0 40px rgba(22, 111, 227, 0.4);
+  transform: translateY(0);
+  animation: expandDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes expandDown {
+  0% {
+    transform: translateY(-20px) scale(0.8);
+  }
+  50% {
+    transform: translateY(5px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.avatarNameContainer {
+  margin-top: 12px;
+  text-align: center;
+  animation: fadeInUp 0.3s forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+  width: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staffSection.light .avatarNameContainer {
+  background: transparent;
+  border: none;
+}
+
+.avatarName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.avatarScore {
+  font-size: 0.8rem;
+  color: #4f9bff;
+  font-weight: 600;
+}
+
+.staffSection.light .avatarName {
+  color: #031040;
+}
+
+/* Teacher detail section */
+.teacherDetailContainer {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.teacherDetail {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.staffSection.light .teacherDetail {
+  box-shadow: 0 10px 25px rgba(22, 111, 227, 0.08),
+    0 5px 15px rgba(79, 155, 255, 0.1), 0 0 5px rgba(22, 111, 227, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.teacherPhotoWrapper {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  position: relative;
+  width: 350px;
+  height: 500px;
+}
+
+.teacherPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 16px;
+}
+
+.teacherName {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding: 2rem 1.5rem 1.5rem;
+  color: white;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.teacherNamePrimary {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.teacherNameSecondary {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+.teacherMetrics {
+  grid-row: 1;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.teacherMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.metricValue {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 2.5rem;
+  color: #4f9bff;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.staffSection.light .metricLabel {
+  color: rgba(3, 16, 64, 0.7);
+}
+
+.teacherQuote {
+  grid-row: 2;
+  grid-column: 2;
+  position: relative;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0 2rem;
+}
+
+.teacherAbout {
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.staffSection.light .teacherAbout {
+  color: rgba(3, 16, 64, 0.7);
+}
+
+.staffSection.light .teacherQuote {
+  color: rgba(3, 16, 64, 0.9);
+}
+
+.quoteMark {
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(79, 155, 255, 0.2);
+}
+
+/* Animation for teacher detail container */
+.fadeTransition {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for active teacher change */
+.teacherDetailChange {
+  opacity: 0;
+}
+
+@keyframes fadeChange {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 850px) {
+  /* Teacher avatars grid layout */
+  .teachersAvatarsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1rem;
+    max-width: 350px;
+    margin: 0 auto 2rem;
+  }
+
+  .teacherAvatar {
+    width: 60px;
+    margin: 0 auto;
+  }
+
+  .avatarWrapper {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+  }
+
+  .teacherAvatar.active {
+    width: 75px;
+  }
+
+  .teacherAvatar.active .avatarWrapper {
+    width: 75px;
+    height: 75px;
+    padding: 8px;
+  }
+
+  .avatarNameContainer {
+    margin-top: 8px;
+  }
+
+  .avatarName {
+    font-size: 0.8rem;
+  }
+
+  .avatarScore {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .teacherDetail {
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+  }
+
+  .teacherPhotoWrapper {
+    grid-row: 1;
+    grid-column: 1;
+    height: 450px;
+    width: 300px;
+  }
+
+  .teacherMetrics {
+    grid-row: 1;
+    grid-column: 2;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    row-gap: 2rem;
+    column-gap: 1.5rem;
+  }
+
+  .teacherQuote {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    padding: 1.5rem 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .teacherDetail {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem;
+  }
+
+  .teacherPhotoWrapper {
+    grid-row: 1;
+    grid-column: 1;
+    height: 400px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .teacherMetrics {
+    grid-row: 2;
+    grid-column: 1;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.5rem;
+  }
+
+  .teacherQuote {
+    grid-row: 3;
+    grid-column: 1;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Keep only the specific styles for the teacher detail that don't conflict with avatar grid */
+  .teacherMetrics {
+    gap: 1rem;
+  }
+
+  .metricValue {
+    font-size: 2rem;
+  }
+
+  .metricLabel {
+    font-size: 0.75rem;
+  }
+
+  .teacherPhotoWrapper {
+    height: 350px;
+  }
+
+  .teacherNamePrimary {
+    font-size: 1.5rem;
+  }
+
+  .teacherNameSecondary {
+    font-size: 1rem;
+  }
+
+  .teacherQuote {
+    font-size: 1rem;
+  }
+
+  .quoteMark {
+    font-size: 4rem;
+    top: -1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .teacherMetrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teacherPhotoWrapper {
+    height: 300px;
+  }
+
+  .teacherName {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .teacherNamePrimary {
+    font-size: 1.25rem;
+  }
+
+  .teacherNameSecondary {
+    font-size: 0.875rem;
+  }
+
+  .metricValue {
+    font-size: 1.75rem;
+  }
+
+  .metricLabel {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .staffContentWrapper,
+  .container {
+    padding: 0;
+  }
+}
+
+.staffSection.light .avatarWrapper {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 5px 15px rgba(22, 111, 227, 0.1),
+    0 3px 8px rgba(79, 155, 255, 0.1);
+  border: 2px solid rgba(22, 111, 227, 0.1);
+}
+
+.staffSection.light .teacherAvatar:hover .avatarWrapper {
+  filter: grayscale(0%);
+  opacity: 1;
+  box-shadow: 0 8px 20px rgba(22, 111, 227, 0.15),
+    0 5px 12px rgba(79, 155, 255, 0.2), 0 0 5px rgba(22, 111, 227, 0.15);
+  border-color: rgba(22, 111, 227, 0.2);
+}
+
+.staffSection.light .teacherAvatar.active .avatarWrapper {
+  box-shadow: 0 10px 25px rgba(22, 111, 227, 0.2),
+    0 8px 15px rgba(79, 155, 255, 0.25), 0 0 10px rgba(22, 111, 227, 0.1);
+  border-color: rgba(22, 111, 227, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
+}

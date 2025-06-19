@@ -1,13 +1,11 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Import custom fonts */
+@import url("../fonts/fonts.css");
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -17,17 +15,14 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Gomme Sans SemiBold", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -35,8 +30,125 @@ a {
   text-decoration: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global focus outline management */
+/* Remove focus outlines for mouse/touch interactions while preserving keyboard accessibility */
+*:focus {
+  outline: none;
+}
+
+/* Show focus outlines only for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Ensure buttons and interactive elements follow the same pattern */
+button:focus {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+a:focus {
+  outline: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* For browsers that don't support :focus-visible, provide fallback */
+@supports not selector(:focus-visible) {
+  *:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+:root {
+  --max-width: 1200px;
+
+  /* Light theme colors */
+  --color-divider: #e8edf5;
+  --color-surface: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --primary: #166fe3;
+  --primary-hover: #1d4ed8;
+  --background: #f8fafd;
+  --navbar-bg: rgba(248, 250, 253, 0.7);
+  --navbar-border: rgba(232, 237, 245, 0.8);
+  --global-bg: #ffffff;
+  --particle-color: rgba(0, 0, 0, 0.15);
+  --particle-glow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --color-divider: #2d3a5c;
+  --color-surface: #172442;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --primary: #4f9bff;
+  --primary-hover: #3b82f6;
+  --background: #0f1a35;
+  --navbar-bg: rgba(15, 26, 53, 0.7);
+  --navbar-border: rgba(45, 58, 92, 0.8);
+  --global-bg: #0f1a35;
+  --particle-color: rgba(255, 255, 255, 0.6);
+  --particle-glow: rgba(255, 255, 255, 0.2);
+}
+
+/* System preference fallback */
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  :root:not([data-theme]) {
+    --color-divider: #2d3a5c;
+    --color-surface: #172442;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --primary: #4f9bff;
+    --primary-hover: #3b82f6;
+    --background: #0f1a35;
+    --navbar-bg: rgba(15, 26, 53, 0.7);
+    --navbar-border: rgba(45, 58, 92, 0.8);
+    --global-bg: #0f1a35;
+    --particle-color: rgba(255, 255, 255, 0.6);
+    --particle-glow: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.wrapper {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section {
+  padding: 6rem 0;
+  scroll-margin-top: 5rem; /* offset for sticky nav */
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 8rem 0;
   }
 }

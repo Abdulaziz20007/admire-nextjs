@@ -1,0 +1,438 @@
+// Header component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.header {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+
+  // Transparent background to show GlobalBackground pattern
+  background: transparent;
+  color: var(--text-primary);
+
+  // Smooth transitions for theme changes
+  transition: color 0.5s ease;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 70vh;
+  background: transparent;
+}
+
+// Left side - Image Section
+.imageSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.imageContainer {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.buildingImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+
+  .imageContainer:hover & {
+    transform: scale(1.05);
+  }
+}
+
+// Right side - Text Section
+.textSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+}
+
+.textContent {
+  max-width: 600px;
+  background: transparent;
+}
+
+.mainHeading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+
+  // Enhanced text contrast for transparent background
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  // Gradient text effect for modern look
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  // Fallback for browsers that don't support background-clip
+  @supports not (-webkit-background-clip: text) {
+    background: none;
+    color: var(--text-primary);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+
+  // Enhanced text contrast for transparent background
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.ctaButton {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(22, 111, 227, 0.3);
+
+  &:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(22, 111, 227, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+// Animated Scroll Indicator
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.scrollButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(22, 111, 227, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+.mouseIcon {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--text-primary);
+  border-radius: 12px;
+  position: relative;
+  background: transparent;
+
+  // Floating animation
+  animation: float 2s ease-in-out infinite;
+
+  // Theme-aware styling
+  transition: border-color 0.5s ease;
+}
+
+.mouseWheel {
+  width: 4px;
+  height: 8px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  // Scrolling animation
+  animation: scroll 2s ease-in-out infinite;
+
+  // Theme-aware styling
+  transition: background-color 0.5s ease;
+}
+
+// Keyframe animations
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+// Theme-specific adjustments
+.header.light {
+  .mainHeading {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    @supports not (-webkit-background-clip: text) {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .subtitle {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.header.dark {
+  .mainHeading {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    @supports not (-webkit-background-clip: text) {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .subtitle {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .imageContainer {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .ctaButton {
+    box-shadow: 0 4px 20px rgba(79, 155, 255, 0.3);
+
+    &:hover {
+      box-shadow: 0 6px 25px rgba(79, 155, 255, 0.4);
+    }
+  }
+
+  .scrollButton:hover {
+    background: rgba(79, 155, 255, 0.1);
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .content {
+    gap: 3rem;
+  }
+
+  .mainHeading {
+    font-size: 3rem;
+  }
+
+  .imageContainer {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 968px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .imageSection {
+    order: 1;
+  }
+
+  .textSection {
+    order: 2;
+    justify-content: center;
+  }
+
+  .mainHeading {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .imageContainer {
+    width: 400px; // Increased from 350px for better visibility on tablet
+    height: 400px; // Increased from 350px for better visibility on tablet
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .content {
+    gap: 2rem;
+    min-height: 60vh;
+  }
+
+  .mainHeading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .ctaButton {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+
+  .imageContainer {
+    width: 350px; // Increased from 300px for better visibility on mobile
+    height: 350px; // Increased from 300px for better visibility on mobile
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .mainHeading {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .ctaButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .imageContainer {
+    width: 320px; // Increased from 280px for better visibility on small mobile
+    height: 320px; // Increased from 280px for better visibility on small mobile
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .imageContainer,
+  .buildingImage,
+  .ctaButton,
+  .scrollButton {
+    transition: none;
+  }
+
+  .imageContainer:hover {
+    transform: none;
+  }
+
+  .imageContainer:hover .buildingImage {
+    transform: none;
+  }
+
+  .ctaButton:hover {
+    transform: none;
+  }
+
+  .scrollButton:hover {
+    transform: none;
+  }
+
+  .mouseIcon {
+    animation: none;
+  }
+
+  .mouseWheel {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .mainHeading {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: var(--text-primary);
+  }
+
+  .ctaButton {
+    border: 2px solid var(--text-primary);
+  }
+}

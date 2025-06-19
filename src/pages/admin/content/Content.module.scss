@@ -1,0 +1,37 @@
+// Content Management page styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.contentPage {
+  padding: 0;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.contentPage.light {
+  color: var(--text-primary);
+}
+
+.contentPage.dark {
+  color: var(--text-primary);
+}
+
+// Page Header
+.pageHeader {
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+}

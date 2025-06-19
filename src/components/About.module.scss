@@ -1,0 +1,415 @@
+// About component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.about {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+
+  // Transparent background to show GlobalBackground pattern
+  background: transparent;
+  color: var(--text-primary);
+
+  // Smooth transitions for theme changes
+  transition: color 0.5s ease;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  // padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+// Content Wrapper - matching the image design
+.aboutContentWrapper {
+  background: rgba(20, 30, 50, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 3rem;
+  position: relative;
+  z-index: 3;
+  max-width: 1000px;
+  margin: 0 auto;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(22, 111, 227, 0.05);
+
+  &:hover {
+    box-shadow: 0 15px 30px rgba(22, 111, 227, 0.15),
+      0 10px 10px rgba(0, 0, 0, 0.1), inset 0 -8px 15px rgba(22, 111, 227, 0.1),
+      0 0 20px rgba(79, 155, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.aboutHeader {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.aboutText {
+  max-width: 100%;
+}
+
+.aboutDescription {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.aboutStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.statCard {
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.statCount {
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #4f9bff;
+  line-height: 1;
+  transition: font-size 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: font-size 0.3s ease, letter-spacing 0.3s ease;
+}
+
+// Theme-specific content wrapper styling
+.about.light .aboutContentWrapper {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(22, 111, 227, 0.05);
+  box-shadow: 0 10px 20px rgba(22, 111, 227, 0.05),
+    0 6px 6px rgba(22, 111, 227, 0.05),
+    inset 0 -5px 10px rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    box-shadow: 0 15px 30px rgba(22, 111, 227, 0.1),
+      0 10px 10px rgba(22, 111, 227, 0.08),
+      inset 0 -8px 15px rgba(255, 255, 255, 0.15),
+      0 0 20px rgba(79, 155, 255, 0.15);
+    border-color: rgba(22, 111, 227, 0.1);
+  }
+}
+
+.about.dark .aboutContentWrapper {
+  background: rgba(20, 30, 50, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1),
+    inset 0 -5px 10px rgba(79, 155, 255, 0.03);
+
+  &:hover {
+    box-shadow: 0 15px 30px rgba(22, 111, 227, 0.15),
+      0 10px 10px rgba(0, 0, 0, 0.15),
+      inset 0 -8px 15px rgba(79, 155, 255, 0.08),
+      0 0 25px rgba(79, 155, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+// Update text color in light mode
+.about.light .aboutDescription {
+  color: rgba(3, 16, 64, 0.8);
+}
+
+.about.light .sectionTitle {
+  color: #031040;
+}
+
+// Update stat label color in light mode
+.about.light .statLabel {
+  color: rgba(3, 16, 64, 0.6);
+}
+
+// Media queries for responsive design
+@media (max-width: 992px) {
+  .aboutStats {
+    gap: 2rem;
+  }
+
+  .aboutContentWrapper {
+    // padding: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 5rem 0 3rem;
+    min-height: auto;
+  }
+
+  .aboutContentWrapper {
+    padding: 1.5rem 1.25rem;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05),
+      inset 0 -3px 6px rgba(22, 111, 227, 0.03);
+
+    &:hover {
+      box-shadow: 0 10px 20px rgba(22, 111, 227, 0.12),
+        0 6px 10px rgba(0, 0, 0, 0.08),
+        inset 0 -4px 8px rgba(22, 111, 227, 0.08),
+        0 0 15px rgba(79, 155, 255, 0.15);
+    }
+  }
+
+  .aboutHeader {
+    margin-bottom: 1.5rem;
+  }
+
+  .aboutContent {
+    gap: 1.25rem;
+  }
+
+  .aboutText {
+    text-align: center;
+  }
+
+  .aboutDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .aboutStats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(79, 155, 255, 0.15);
+  }
+
+  .statCard {
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:hover {
+      transform: none;
+      background: none;
+    }
+  }
+
+  .about.light .statCard {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .statCount {
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem;
+    line-height: 1;
+    color: #4f9bff;
+    text-shadow: none;
+    font-weight: 700;
+  }
+
+  .about.light .statCount {
+    text-shadow: none;
+  }
+
+  .statLabel {
+    font-size: 0.65rem;
+    letter-spacing: 0.4px;
+    line-height: 1.2;
+    opacity: 0.9;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .about.light .statLabel {
+    color: rgba(3, 16, 64, 0.7);
+  }
+}
+
+// Small phones
+@media (max-width: 380px) {
+  .about {
+    padding: 4rem 0 2rem;
+  }
+
+  .aboutContentWrapper {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .aboutDescription {
+    font-size: 0.95rem;
+  }
+
+  .aboutContent {
+    gap: 1.25rem;
+  }
+
+  .aboutStats {
+    gap: 0.35rem;
+    border-top: 1px solid rgba(79, 155, 255, 0.12);
+    padding-top: 0.4rem;
+  }
+
+  .statCard {
+    padding: 0;
+  }
+
+  .statCount {
+    font-size: 1.3rem;
+    margin-bottom: 0.05rem;
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+// Extra small phones
+@media (max-width: 320px) {
+  .statCount {
+    font-size: 1.15rem;
+  }
+
+  .statLabel {
+    font-size: 0.55rem;
+    letter-spacing: 0.1px;
+  }
+
+  .statCard {
+    padding: 0;
+  }
+
+  .aboutStats {
+    gap: 0.25rem;
+    padding-top: 0.3rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  .aboutStats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .statCount {
+    font-size: 2.5rem;
+  }
+}
+
+// Animation for stat cards on mobile - adjust for text-only cards
+@media (max-width: 768px) {
+  @keyframes statCardPopIn {
+    0% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .statCard {
+    animation: statCardPopIn 0.3s ease forwards;
+
+    &:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+
+  // Improve text-only styling for about section
+  .aboutStats {
+    margin-top: 0.25rem;
+  }
+
+  .statCount {
+    font-weight: 700;
+    color: #4f9bff;
+  }
+
+  .about.dark .statCount {
+    color: #4f9bff;
+  }
+
+  .about.light .statCount {
+    color: #166fe3;
+  }
+}
+
+// Override specific glass morphism styles for all screen sizes
+@media (max-width: 768px) {
+  .about.light .statCard,
+  .about.dark .statCard {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .statCard:hover {
+    transform: none;
+    background: none;
+  }
+}
