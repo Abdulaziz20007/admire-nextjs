@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/hooks/useAuth";
+import { usePermissions } from "@/hooks/usePermissions";
 import { useSidebar } from "@/contexts/SidebarContext";
 import {
   MdDashboard,
@@ -13,6 +14,7 @@ import {
   MdLogout,
   MdLightMode,
   MdDarkMode,
+  MdMessage,
 } from "react-icons/md";
 import { IoCaretForward, IoCaretBack } from "react-icons/io5";
 import styles from "./AdminSidebar.module.scss";
@@ -23,6 +25,7 @@ interface SidebarItem {
   href: string;
   icon: React.ComponentType<any>;
   badge?: string;
+  permission?: keyof ReturnType<typeof usePermissions>;
 }
 
 interface AdminSidebarProps {
@@ -37,24 +40,35 @@ const sidebarItems: SidebarItem[] = [
     label: "Dashboard",
     href: "/admin",
     icon: MdDashboard,
+    permission: "canAccessDashboard",
   },
   {
     id: "content",
     label: "Content",
     href: "/admin/content",
     icon: MdEdit,
+    permission: "canModifyContent",
   },
   {
     id: "admin",
     label: "Admin",
     href: "/admin/admins",
     icon: MdPeople,
+    permission: "canManageAdmins",
+  },
+  {
+    id: "messages",
+    label: "Messages",
+    href: "/admin/messages",
+    icon: MdMessage,
+    permission: "canAccessMessages",
   },
   {
     id: "settings",
     label: "Settings",
     href: "/admin/settings",
     icon: MdSettings,
+    permission: "canAccessSettings",
   },
 ];
 
@@ -64,7 +78,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   className = "",
 }) => {
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
+  const permissions = usePermissions();
   const { isCollapsed, toggleCollapse } = useSidebar();
   const router = useRouter();
 
@@ -79,6 +94,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
     }
     return router.pathname.startsWith(href);
   };
+
+  // Filter sidebar items based on permissions
+  const allowedItems = sidebarItems.filter((item) => {
+    if (!item.permission) return true;
+    return permissions[item.permission];
+  });
 
   return (
     <aside
@@ -123,7 +144,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <nav className={styles.navigation}>
         <div className={styles.navContainer}>
           <ul className={styles.navList}>
-            {sidebarItems.map((item) => (
+            {allowedItems.map((item) => (
               <li key={item.id} className={styles.navItem}>
                 <Link
                   href={item.href}

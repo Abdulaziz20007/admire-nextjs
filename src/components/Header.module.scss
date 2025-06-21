@@ -153,6 +153,43 @@
   }
 }
 
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.testButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Gomme Sans SemiBold", sans-serif;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
 // Animated Scroll Indicator
 .scrollIndicator {
   position: absolute;
@@ -354,9 +391,18 @@
     margin-bottom: 2rem;
   }
 
+  .buttonGroup {
+    gap: 0.75rem;
+  }
+
   .ctaButton {
     padding: 0.875rem 2rem;
     font-size: 1rem;
+  }
+
+  .testButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.85rem;
   }
 
   .imageContainer {
@@ -378,9 +424,20 @@
     font-size: 0.95rem;
   }
 
+  .buttonGroup {
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .ctaButton {
     padding: 0.75rem 1.5rem;
     font-size: 0.95rem;
+  }
+
+  .testButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 
   .imageContainer {
@@ -410,6 +467,10 @@
     transform: none;
   }
 
+  .testButton:hover {
+    transform: none;
+  }
+
   .scrollButton:hover {
     transform: none;
   }
@@ -433,6 +494,10 @@
   }
 
   .ctaButton {
+    border: 2px solid var(--text-primary);
+  }
+
+  .testButton {
     border: 2px solid var(--text-primary);
   }
 }

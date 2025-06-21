@@ -2,7 +2,7 @@
 // Following the existing project patterns for SCSS modules and theme support
 
 .about {
-  padding: 6rem 0;
+  padding: var(--section-padding-mobile) 0;
   position: relative;
   overflow: hidden;
   min-height: 80vh;
@@ -175,9 +175,26 @@
   }
 }
 
+@media (min-width: 480px) {
+  .about {
+    padding: var(--section-padding-small) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .about {
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about {
+    padding: var(--section-padding-desktop) 0;
+  }
+}
+
 @media (max-width: 768px) {
   .about {
-    padding: 5rem 0 3rem;
     min-height: auto;
   }
 
@@ -278,10 +295,6 @@
 
 // Small phones
 @media (max-width: 380px) {
-  .about {
-    padding: 4rem 0 2rem;
-  }
-
   .aboutContentWrapper {
     padding: 1.5rem 1.25rem;
   }

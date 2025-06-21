@@ -1,9 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
+import apiClient from "@/lib/api-client";
 
 export interface AdminUser {
-  id: number;
-  login: string;
+  _id: string;
+  username: string;
+  name: string;
+  surname: string;
+  priority: string;
+  avatar?: string;
 }
 
 export interface AuthState {
@@ -12,119 +17,198 @@ export interface AuthState {
   isAuthenticated: boolean;
 }
 
-// Simple client-side authentication
-const ADMIN_CREDENTIALS = {
-  login: "admin",
-  password: "admin",
-};
+// Global state to track if auth has been checked in this session
+let authChecked = false;
+let globalAuthState: AuthState | null = null;
 
 export const useAuth = () => {
-  const [authState, setAuthState] = useState<AuthState>({
-    user: null,
-    isLoading: true,
-    isAuthenticated: false,
+  const [authState, setAuthState] = useState<AuthState>(() => {
+    // Initialize with global state if available
+    if (globalAuthState) {
+      return globalAuthState;
+    }
+    return {
+      user: null,
+      isLoading: true,
+      isAuthenticated: false,
+    };
   });
   const router = useRouter();
 
-  // Check authentication status from localStorage
-  const checkAuth = useCallback(() => {
+  // Check authentication status using JWT token (only for initial load)
+  const checkAuth = useCallback(async () => {
     // Only run on client side
     if (typeof window === "undefined") {
       return false;
     }
 
+    // If auth has already been checked in this session, use cached state
+    if (authChecked && globalAuthState) {
+      setAuthState(globalAuthState);
+      return globalAuthState.isAuthenticated;
+    }
+
     try {
-      const storedUser = localStorage.getItem("admin-user");
-      if (storedUser) {
-        const user = JSON.parse(storedUser);
-        setAuthState({
-          user,
-          isLoading: false,
-          isAuthenticated: true,
-        });
-        return true;
-      } else {
-        setAuthState({
+      // Check if token exists in localStorage
+      const token = localStorage.getItem("admin-token");
+      if (!token) {
+        const newState = {
           user: null,
           isLoading: false,
           isAuthenticated: false,
-        });
+        };
+        setAuthState(newState);
+        globalAuthState = newState;
+        authChecked = true;
+        return false;
+      }
+
+      // Verify token with backend using API client (only on first check)
+      const response = await apiClient.get("/admin/verify");
+
+      if (response.success && response.data?.admin) {
+        const newState = {
+          user: response.data.admin,
+          isLoading: false,
+          isAuthenticated: true,
+        };
+        setAuthState(newState);
+        globalAuthState = newState;
+        authChecked = true;
+        return true;
+      } else {
+        // Token is invalid, clear it
+        apiClient.clearTokens();
+        const newState = {
+          user: null,
+          isLoading: false,
+          isAuthenticated: false,
+        };
+        setAuthState(newState);
+        globalAuthState = newState;
+        authChecked = true;
         return false;
       }
     } catch (error) {
       console.error("Auth check failed:", error);
-      setAuthState({
+      apiClient.clearTokens();
+      const newState = {
         user: null,
         isLoading: false,
         isAuthenticated: false,
-      });
+      };
+      setAuthState(newState);
+      globalAuthState = newState;
+      authChecked = true;
       return false;
     }
   }, []);
 
-  // Login function with client-side validation
+  // Login function using API client
   const login = useCallback(
-    (loginData: { login: string; password: string }) => {
+    async (loginData: { username: string; password: string }) => {
       try {
-        // Simple client-side authentication
-        if (
-          loginData.login === ADMIN_CREDENTIALS.login &&
-          loginData.password === ADMIN_CREDENTIALS.password
-        ) {
-          const user = { id: 1, login: loginData.login };
+        const response = await apiClient.post("/admin/auth", loginData);
 
-          // Store user in localStorage
-          localStorage.setItem("admin-user", JSON.stringify(user));
+        if (response.success && response.data?.accessToken) {
+          // Store JWT token using API client
+          apiClient.setToken(response.data.accessToken);
 
           // Update auth state
-          setAuthState({
-            user,
+          const newState = {
+            user: response.data.admin,
             isLoading: false,
             isAuthenticated: true,
-          });
+          };
+          setAuthState(newState);
+          globalAuthState = newState;
+
+          // Mark auth as checked since we just logged in
+          authChecked = true;
 
           return { success: true, error: null };
         } else {
-          return { success: false, error: "Invalid credentials" };
+          return { success: false, error: response.error || "Login failed" };
         }
       } catch (error) {
         console.error("Login failed:", error);
-        return { success: false, error: "Login error" };
+        return { success: false, error: "Network error" };
       }
     },
     []
   );
 
-  // Logout function
-  const logout = useCallback(() => {
+  // Logout function using API client
+  const logout = useCallback(async () => {
     try {
-      // Clear localStorage
-      localStorage.removeItem("admin-user");
+      // Call logout API using API client
+      await apiClient.get("/admin/logout");
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error("Logout API failed:", error);
     } finally {
-      // Always clear auth state
-      setAuthState({
+      // Always clear local state
+      apiClient.clearTokens();
+      const newState = {
         user: null,
         isLoading: false,
         isAuthenticated: false,
-      });
+      };
+      setAuthState(newState);
+      globalAuthState = newState;
+      // Reset auth check flag so next login will verify properly
+      authChecked = false;
       // Redirect to login page
       router.push("/admin/login");
     }
   }, [router]);
+
+  // Refresh user data (for when user data might have changed)
+  const refreshUser = useCallback(async () => {
+    if (!authState.isAuthenticated) return false;
+
+    try {
+      const response = await apiClient.get("/admin/verify");
+
+      if (response.success && response.data?.admin) {
+        const newState = {
+          ...authState,
+          user: response.data.admin,
+        };
+        setAuthState(newState);
+        globalAuthState = newState;
+        return true;
+      } else {
+        // Token is invalid, clear it
+        apiClient.clearTokens();
+        const newState = {
+          user: null,
+          isLoading: false,
+          isAuthenticated: false,
+        };
+        setAuthState(newState);
+        globalAuthState = newState;
+        authChecked = false; // Reset so next auth check will verify properly
+        return false;
+      }
+    } catch (error) {
+      console.error("User refresh failed:", error);
+      return false;
+    }
+  }, [authState.isAuthenticated]);
 
   // Check auth on mount (client-side only)
   useEffect(() => {
     if (typeof window !== "undefined") {
       checkAuth();
     }
-  }, [checkAuth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array - only run on mount
 
   return {
     ...authState,
     login,
     logout,
     checkAuth,
+    refreshUser,
   };
 };

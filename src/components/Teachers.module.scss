@@ -7,6 +7,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding: var(--section-padding-mobile) 0;
 
   // Transparent background to show GlobalBackground pattern
   background: transparent;
@@ -26,11 +27,11 @@
 
 /* Content Wrapper */
 .staffContentWrapper {
-  padding: 3rem;
   position: relative;
   z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 var(--content-padding-x);
   transition: all 0.4s ease-in-out;
 }
 
@@ -366,6 +367,29 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+/* Responsive spacing breakpoints */
+@media (min-width: 480px) {
+  .staffSection {
+    padding: var(--section-padding-small) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .staffSection {
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .staffSection {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .staffContentWrapper {
+    padding: 0 var(--content-padding-x-desktop);
   }
 }
 

@@ -16,12 +16,12 @@ const LoadingSpinner: React.FC = () => {
   return (
     <div className={`${styles.loadingContainer} ${styles[theme]}`}>
       <div className={styles.loadingContent}>
-        <div className={styles.spinner}>
-          <div className={styles.spinnerRing}></div>
-          <div className={styles.spinnerRing}></div>
-          <div className={styles.spinnerRing}></div>
+        <div className={styles.simpleSpinner}>
+          <div className={styles.spinnerDot}></div>
+          <div className={styles.spinnerDot}></div>
+          <div className={styles.spinnerDot}></div>
         </div>
-        <p className={styles.loadingText}>Verifying authentication...</p>
+        <p className={styles.loadingText}>Loading admin panel...</p>
       </div>
     </div>
   );

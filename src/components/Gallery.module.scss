@@ -5,7 +5,7 @@
   position: relative;
   width: 100vw;
   min-height: 80vh;
-  padding: 6rem 0;
+  padding: var(--section-padding-mobile) 0;
   overflow: hidden;
 
   // Transparent background to show GlobalBackground pattern
@@ -438,10 +438,27 @@
   }
 }
 
-// Responsive Design
+// Responsive Design - Standardized spacing breakpoints
+@media (min-width: 480px) {
+  .gallery {
+    padding: var(--section-padding-small) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery {
+    padding: var(--section-padding-desktop) 0;
+  }
+}
+
 @media (max-width: 768px) {
   .gallery {
-    padding: 4rem 0 3rem;
     min-height: auto;
   }
 

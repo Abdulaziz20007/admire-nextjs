@@ -51,9 +51,9 @@ export const AdminDashboard: React.FC = () => {
       {
         id: "1",
         type: "login",
-        message: `Admin ${user?.login} logged in`,
+        message: `Admin ${user?.username} logged in`,
         timestamp: new Date().toISOString(),
-        user: user?.login,
+        user: user?.username,
       },
       {
         id: "2",
@@ -77,10 +77,6 @@ export const AdminDashboard: React.FC = () => {
 
   const formatCurrentTime = () => {
     return currentTime.toLocaleString("en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
@@ -131,7 +127,7 @@ export const AdminDashboard: React.FC = () => {
       {/* Welcome Section */}
       <div className={styles.welcomeSection}>
         <h2 className={styles.welcomeTitle}>
-          Welcome back, {user?.login || "Admin"}! 👋
+          Welcome back, {user?.username || "Admin"}! 👋
         </h2>
         <p className={styles.welcomeSubtitle}>
           Here's what's happening with your system today.

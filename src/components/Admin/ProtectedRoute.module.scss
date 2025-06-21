@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  
+
   // Glass morphism background
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -35,7 +35,7 @@
   gap: 1.5rem;
   padding: 2rem;
   border-radius: 16px;
-  
+
   // Glass morphism card
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
@@ -55,70 +55,73 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-.spinner {
-  position: relative;
-  width: 60px;
-  height: 60px;
+// Simple spinner styles
+.simpleSpinner {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.spinnerRing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 3px solid transparent;
-  border-top: 3px solid var(--primary);
+.spinnerDot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  animation: spin 1.2s linear infinite;
+  background: #166fe3;
+  animation: spinnerPulse 1.4s ease-in-out infinite both;
 }
 
-.spinnerRing:nth-child(2) {
-  width: 80%;
-  height: 80%;
-  top: 10%;
-  left: 10%;
-  border-top-color: rgba(79, 155, 255, 0.6);
-  animation-duration: 1.5s;
-  animation-direction: reverse;
+.spinnerDot:nth-child(1) {
+  animation-delay: -0.32s;
 }
 
-.spinnerRing:nth-child(3) {
-  width: 60%;
-  height: 60%;
-  top: 20%;
-  left: 20%;
-  border-top-color: rgba(79, 155, 255, 0.3);
-  animation-duration: 2s;
+.spinnerDot:nth-child(2) {
+  animation-delay: -0.16s;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
+.spinnerDot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes spinnerPulse {
+  0%,
+  80%,
   100% {
-    transform: rotate(360deg);
+    transform: scale(0.8);
+    opacity: 0.5;
   }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Theme-aware spinner colors
+.loadingContainer.light .spinnerDot {
+  background: #166fe3;
+}
+
+.loadingContainer.dark .spinnerDot {
+  background: #4a9eff;
 }
 
 .loadingText {
   font-family: "Gomme Sans SemiBold", sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
   text-align: center;
   margin: 0;
   opacity: 0.8;
-  animation: pulse 2s ease-in-out infinite;
+  transition: all 0.3s ease;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
+// Theme-aware text colors
+.loadingContainer.light .loadingText {
+  color: #031040;
+}
+
+.loadingContainer.dark .loadingText {
+  color: #f0f2f8;
 }
 
 // Responsive design
@@ -127,12 +130,7 @@
     padding: 1.5rem;
     margin: 1rem;
   }
-  
-  .spinner {
-    width: 50px;
-    height: 50px;
-  }
-  
+
   .loadingText {
     font-size: 0.9rem;
   }
@@ -143,12 +141,7 @@
     padding: 1.25rem;
     margin: 0.5rem;
   }
-  
-  .spinner {
-    width: 40px;
-    height: 40px;
-  }
-  
+
   .loadingText {
     font-size: 0.85rem;
   }

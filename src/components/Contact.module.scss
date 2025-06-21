@@ -2,7 +2,7 @@
 // Following the existing project patterns for SCSS modules and theme support
 
 .locationSection {
-  padding: 0 0 8rem 0;
+  padding: var(--section-padding-mobile) 0;
   position: relative;
   overflow: hidden;
   min-height: 90vh;
@@ -521,9 +521,27 @@
   // }
 }
 
+/* Responsive spacing breakpoints */
+@media (min-width: 480px) {
+  .locationSection {
+    padding: var(--section-padding-small) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .locationSection {
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .locationSection {
+    padding: var(--section-padding-desktop) 0;
+  }
+}
+
 @media (max-width: 768px) {
   .locationSection {
-    padding: 6rem 0 4rem;
     min-height: auto;
   }
 
@@ -601,10 +619,6 @@
 }
 
 @media (max-width: 480px) {
-  .locationSection {
-    padding: 4rem 0 2rem;
-  }
-
   .locationMap {
     height: 400px;
   }

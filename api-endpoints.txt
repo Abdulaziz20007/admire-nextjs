@@ -1,0 +1,97 @@
+No auth required
+POST /web to get all data that needs to the landing page (header img, txt, teachers, students, their images, location, contact and social datas) (requirements, user agent should be browser and refer url should be admirelc.uz)
+POST /admin/auth to login (body should have username and password) returns access and refresh tokens
+
+Auth required
+
+// Auth
+GET /admin/logout to logout (no body required)
+GET /admin/refresh to refresh access token (no body required)
+
+// Admin
+GET /admin/admins to get all admins (query parameters for filtering options)
+GET /admin/admins/[id] to get a specific admin (no body required)
+POST /admin/admins to create a new admin (body should have admin details)
+PUT /admin/admins/[id] to update a specific admin (body should have the admin to update)
+DELETE /admin/admins/[id] to delete a specific admin (no body required)
+
+// Messages
+GET /admin/messages to get all messages (query parameters for filtering options)
+GET /admin/messages/[id] to get a specific message (no body required)
+PUT /admin/messages/[id] to update a specific message (body should have the message to update)
+DELETE /admin/messages/[id] to delete a specific message (no body required)
+
+// Teachers 
+GET /admin/teachers to get all teachers (query parameters for filtering options)
+GET /admin/teachers/[id] to get a specific teacher (no body required)
+POST /admin/teachers to create a new teacher (body should have teacher details)
+PUT /admin/teachers/[id] to update a specific teacher (body should have the teacher to update)
+DELETE /admin/teachers/[id] to delete a specific teacher (no body required)
+
+// Students
+GET /admin/students to get all students (query parameters for filtering options)
+GET /admin/students/[id] to get a specific student (no body required)
+POST /admin/students to create a new student (body should have student details)
+PUT /admin/students/[id] to update a specific student (body should have the student to update)
+DELETE /admin/students/[id] to delete a specific student (no body required)
+
+// Media
+GET /admin/media to get all media (query parameters for filtering options)
+GET /admin/media/[id] to get a specific media (no body required)
+POST /admin/media to create a new media (body should have media details)
+PUT /admin/media/[id] to update a specific media (body should have the media to update)
+DELETE /admin/media/[id] to delete a specific media (no body required)
+
+// Web
+GET /admin/web to get web configuration (no body required)
+PUT /admin/web to update web configuration (body should have the web config to update)
+
+// Socials
+GET /admin/socials to get all socials (query parameters for filtering options)
+GET /admin/socials/[id] to get a specific social (no body required)
+POST /admin/socials to create a new social (body should have social details)
+PUT /admin/socials/[id] to update a specific social (body should have the social to update)
+DELETE /admin/socials/[id] to delete a specific social (no body required)
+
+// Icons
+GET /admin/icons to get all icons (query parameters for filtering options)
+GET /admin/icons/[id] to get a specific icon (no body required)
+POST /admin/icons to create a new icon (body should have icon details)
+PUT /admin/icons/[id] to update a specific icon (body should have the icon to update)
+DELETE /admin/icons/[id] to delete a specific icon (no body required)
+
+// WebPhone relations
+GET /admin/web-phones to get all web-phone relations
+POST /admin/web-phones to create a new web-phone relation
+DELETE /admin/web-phones/[id] to delete a web-phone relation
+
+// WebMedia relations
+GET /admin/web-media to get all web-media relations
+POST /admin/web-media to create a new web-media relation
+PUT /admin/web-media/[id] to update a web-media relation
+DELETE /admin/web-media/[id] to delete a web-media relation
+
+// WebStudent relations
+GET /admin/web-students to get all web-student relations
+POST /admin/web-students to create a new web-student relation
+DELETE /admin/web-students/[id] to delete a web-student relation
+
+// WebTeacher relations
+GET /admin/web-teachers to get all web-teacher relations
+POST /admin/web-teachers to create a new web-teacher relation
+DELETE /admin/web-teachers/[id] to delete a web-teacher relation
+
+// WebSocial relations
+GET /admin/web-socials to get all web-social relations
+POST /admin/web-socials to create a new web-social relation
+DELETE /admin/web-socials/[id] to delete a web-social relation
+
+
+Passwords must be encrypted using bcrypt before storing in the database. Use BCRYPT_SALT environment variable to configure the number of salt rounds.
+
+Example jwt payload:
+{
+  "id": "mongodbadminid",
+  "username": "admin",
+  "priority": "3"
+}

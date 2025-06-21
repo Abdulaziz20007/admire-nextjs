@@ -55,7 +55,9 @@ export default function Header() {
                 Bizning mutaxassis til ko'rsatmalari bilan o'zingizning
                 salohiyatingizni oshiriq
               </p>
-              <button className={styles.ctaButton}>Boshlash</button>
+              <div className={styles.buttonGroup}>
+                <button className={styles.ctaButton}>Boshlash</button>
+              </div>
             </div>
           </div>
         </div>

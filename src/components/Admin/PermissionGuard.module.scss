@@ -1,0 +1,145 @@
+// PermissionGuard component styles
+// Following the existing project patterns for SCSS modules and theme support
+
+.permissionGuard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.loadingContainer,
+.errorContainer {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+// Light theme
+.permissionGuard.light {
+  .loadingContainer,
+  .errorContainer {
+    background: rgba(248, 250, 253, 0.8);
+    border-color: rgba(15, 26, 53, 0.1);
+    color: #031040;
+  }
+}
+
+// Dark theme
+.permissionGuard.dark {
+  .loadingContainer,
+  .errorContainer {
+    background: rgba(15, 26, 53, 0.8);
+    border-color: rgba(240, 242, 248, 0.1);
+    color: #f0f2f8;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(59, 130, 246, 0.3);
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.errorMessage {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.permissionInfo {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.permissionGuard.light .permissionInfo {
+  background: rgba(15, 26, 53, 0.05);
+  border: 1px solid rgba(15, 26, 53, 0.1);
+}
+
+.permissionGuard.dark .permissionInfo {
+  background: rgba(240, 242, 248, 0.05);
+  border: 1px solid rgba(240, 242, 248, 0.1);
+}
+
+.permissionInfo p {
+  margin: 0.5rem 0;
+}
+
+.permissionInfo strong {
+  font-weight: 600;
+}
+
+.backButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #3b82f6;
+  color: white;
+}
+
+.backButton:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.backButton:active {
+  transform: translateY(0);
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .permissionGuard {
+    padding: 1rem;
+    min-height: 50vh;
+  }
+  
+  .loadingContainer,
+  .errorContainer {
+    padding: 2rem 1.5rem;
+  }
+  
+  .errorTitle {
+    font-size: 1.25rem;
+  }
+  
+  .errorIcon {
+    font-size: 3rem;
+  }
+}

@@ -9,7 +9,7 @@ export default function AdminLogin() {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const { login: authLogin, isAuthenticated } = useAuth();
-  const [login, setLogin] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function AdminLogin() {
     setError(null);
 
     try {
-      const result = await authLogin({ login, password });
+      const result = await authLogin({ username, password });
       if (result.success) {
         const redirectPath =
           sessionStorage.getItem("adminRedirectPath") || "/admin";
@@ -103,9 +103,9 @@ export default function AdminLogin() {
                 <input
                   className={styles.input}
                   type="text"
-                  placeholder="Username or Email"
-                  value={login}
-                  onChange={(e) => setLogin(e.target.value)}
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                   disabled={loading}
                 />
@@ -126,7 +126,7 @@ export default function AdminLogin() {
               <button
                 className={styles.button}
                 type="submit"
-                disabled={loading || !login || !password}
+                disabled={loading || !username || !password}
               >
                 {loading ? (
                   <span className={styles.buttonContent}>

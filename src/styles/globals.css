@@ -85,6 +85,21 @@ input:focus-visible {
 :root {
   --max-width: 1200px;
 
+  /* Standardized Section Spacing System */
+  --section-padding-desktop: 8rem;
+  --section-padding-tablet: 6rem;
+  --section-padding-mobile: 4rem;
+  --section-padding-small: 3rem;
+
+  /* Component-specific spacing overrides */
+  --header-min-height: 100vh;
+  --footer-padding-top: 4rem;
+  --footer-padding-bottom: 1.5rem;
+
+  /* Content wrapper spacing */
+  --content-padding-x: 1rem;
+  --content-padding-x-desktop: 2rem;
+
   /* Light theme colors */
   --color-divider: #e8edf5;
   --color-surface: #ffffff;
@@ -143,12 +158,24 @@ input:focus-visible {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: var(--section-padding-mobile) 0;
   scroll-margin-top: 5rem; /* offset for sticky nav */
+}
+
+@media (min-width: 480px) {
+  .section {
+    padding: var(--section-padding-small) 0;
+  }
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 8rem 0;
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--section-padding-desktop) 0;
   }
 }
