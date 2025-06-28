@@ -106,6 +106,7 @@ input:focus-visible {
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --primary: #166fe3;
+  --primary-rgb: 22, 111, 227;
   --primary-hover: #1d4ed8;
   --background: #f8fafd;
   --navbar-bg: rgba(248, 250, 253, 0.7);
@@ -122,6 +123,7 @@ input:focus-visible {
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
   --primary: #4f9bff;
+  --primary-rgb: 79, 155, 255;
   --primary-hover: #3b82f6;
   --background: #0f1a35;
   --navbar-bg: rgba(15, 26, 53, 0.7);
@@ -139,6 +141,7 @@ input:focus-visible {
     --text-primary: #f9fafb;
     --text-secondary: #d1d5db;
     --primary: #4f9bff;
+    --primary-rgb: 79, 155, 255;
     --primary-hover: #3b82f6;
     --background: #0f1a35;
     --navbar-bg: rgba(15, 26, 53, 0.7);

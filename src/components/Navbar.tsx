@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import styles from "./Navbar.module.scss";
+import LanguageToggle from "./LanguageToggle";
 
 // Logo component
 const Logo = () => {
@@ -91,6 +93,7 @@ const ThemeToggle = ({
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -140,11 +143,31 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { key: "home", label: "Home", sectionId: "home" },
-    { key: "about", label: "About", sectionId: "about" },
-    { key: "teachers", label: "Teachers", sectionId: "teachers" },
-    { key: "students", label: "Students", sectionId: "students" },
-    { key: "contact", label: "Contact", sectionId: "contact" },
+    {
+      key: "home",
+      label: language === "uz" ? "Bosh sahifa" : "Home",
+      sectionId: "home",
+    },
+    {
+      key: "about",
+      label: language === "uz" ? "Biz haqimizda" : "About",
+      sectionId: "about",
+    },
+    {
+      key: "teachers",
+      label: language === "uz" ? "O'qituvchilar" : "Teachers",
+      sectionId: "teachers",
+    },
+    {
+      key: "students",
+      label: language === "uz" ? "Talabalar" : "Students",
+      sectionId: "students",
+    },
+    {
+      key: "contact",
+      label: language === "uz" ? "Bog'lanish" : "Contact",
+      sectionId: "contact",
+    },
   ];
 
   return (
@@ -179,6 +202,9 @@ const Navbar = () => {
         </div>
 
         <div className={styles.navControls}>
+          {/* Language Toggle */}
+          <LanguageToggle />
+
           {/* Theme Toggle */}
           <ThemeToggle toggle={toggleTheme} currentTheme={theme} />
 

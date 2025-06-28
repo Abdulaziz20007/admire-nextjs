@@ -1,0 +1,645 @@
+.studentsSection {
+  padding: 4rem 0;
+  --bg-dark: #111827;
+  --text-light: #f3f4f6;
+  --text-muted: #d1d5db;
+  --text-dark-muted: #9ca3af;
+  --indigo-200: #c7d2fe;
+  --indigo-300: #a5b4fc;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --card-height: 600px;
+  --card-width: 24rem;
+
+  &.light {
+    --section-description-color: #6c757d;
+    --card-bg: #fff;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --name-color: #333;
+    --text-color: #4a4a4a;
+    --quote-bg: #f8f9fa;
+    --bg-dark: #f9fafb;
+    --text-light: #1f2937;
+    --text-muted: #4b5563;
+    --text-dark-muted: #6b7280;
+
+    .flipCardBack {
+      background-color: rgba(229, 231, 235, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .scoreItem,
+    .certificateLink,
+    .studentReview {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .flipCardFront {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+      color: #fff;
+
+      .profileTitle {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .profileName {
+        color: #fff;
+      }
+    }
+  }
+
+  &.dark {
+    --section-description-color: #a0a0a0;
+    --card-bg: #2d2d2d;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --name-color: #e0e0e0;
+    --text-color: #b0b0b0;
+    --quote-bg: #383838;
+
+    .flipCardFront {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+    }
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sectionDescription {
+  font-size: 1.125rem;
+  color: var(--section-description-color);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.studentsSwiper {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper {
+  width: 100%;
+  padding-bottom: 50px;
+
+  :global(.swiper-wrapper) {
+    transition-timing-function: linear;
+  }
+}
+
+.swiperSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.studentCard {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  width: 100%;
+  padding: 2rem;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+}
+
+.studentInfo {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex: 1;
+  }
+}
+
+.studentImageContainer {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+}
+
+.studentImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+
+  @media screen and (min-width: 768px) {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.studentDetails {
+  flex: 1;
+}
+
+.studentName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--name-color);
+}
+
+.studentScores {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.overallScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+}
+
+.scoreLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scoreValue {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.cefrBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.detailedScores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.scoreItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreNumber {
+  font-weight: 600;
+  color: var(--name-color);
+  font-size: 1.25rem;
+}
+
+.studentQuote {
+  border-left: 3px solid var(--section-description-color);
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 0;
+  font-style: italic;
+  background-color: var(--quote-bg);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-color);
+}
+
+.certificateContainer {
+  margin-top: 2rem;
+
+  @media screen and (min-width: 1024px) {
+    margin-top: 0;
+    width: 40%;
+  }
+}
+
+.certificateTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: var(--name-color);
+  text-align: center;
+}
+
+.certificateImage {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+}
+
+@media screen and (max-width: 767px) {
+  .studentCard {
+    padding: 1.5rem;
+  }
+
+  .certificateContainer {
+    margin-top: 1.5rem;
+  }
+
+  .studentName {
+    font-size: 1.25rem;
+  }
+
+  .detailedScores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flipCardContainer {
+  perspective: 1500px;
+  width: 100%;
+  max-width: var(--card-width);
+  height: var(--card-height);
+  opacity: 0;
+  animation: card-enter 0.8s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  &.isFlipped .flipCardInner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  transform-style: preserve-3d;
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.flipCardFront {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  text-align: center;
+  color: var(--text-light);
+
+  .isFlipped & {
+    opacity: 0;
+  }
+}
+
+.profileImage {
+  height: 9rem;
+  width: 9rem;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5),
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  margin: 0 auto 1rem;
+}
+
+.profileName {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.profileTitle {
+  color: var(--indigo-200);
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.scoreDisplay .label {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.scoreDisplay .score {
+  font-size: 6rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+}
+
+.cefrBadge {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.flipCardBack {
+  background-color: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: rotateY(180deg);
+  color: var(--text-light);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    pointer-events: none;
+  }
+}
+
+.backTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.scoreBreakdown {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.scoreItem {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  text-align: center;
+
+  svg {
+    margin: 0 auto 0.25rem;
+    color: var(--indigo-300);
+  }
+
+  .label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .score {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.backContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.certificateLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  svg {
+    color: var(--indigo-300);
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    color: var(--text-dark-muted);
+  }
+}
+
+.studentReview {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+
+  .title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--indigo-300);
+  }
+
+  blockquote {
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+}
+
+.actionButton {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  &.primary {
+    background-color: var(--indigo-600);
+    color: var(--text-light);
+    &:hover {
+      background-color: #e5e7eb;
+      color: var(--primary-hover);
+    }
+  }
+
+  &.secondary {
+    background-color: var(--primary);
+    color: white;
+    margin-top: 1rem;
+    &:hover {
+      background-color: var(--primary-hover);
+    }
+  }
+}
+
+.animateBackElements .animatable {
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+  border-radius: 1.5rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.modalContent {
+  position: relative;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 56rem;
+  width: 100%;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+
+  .hidden & {
+    transform: scale(0.95);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 0.25rem;
+  }
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background-color: white;
+  color: #1f2937;
+  border-radius: 9999px;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}

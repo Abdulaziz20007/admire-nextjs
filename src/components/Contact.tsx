@@ -1,24 +1,9 @@
 import React, { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import useWebDataStore from "@/store/useWebDataStore";
+import { getLocalizedText } from "@/utils/localization";
 import styles from "./Contact.module.scss";
-
-// Static data for the contact section
-const contactData = {
-  title: "Bizning Manzil",
-  contactTitle: "Biz bilan bog'lanish",
-  addressTitle: "Manzilimiz",
-  nameLabel: "Ismingiz",
-  namePlaceholder: "Ismingizni kiriting",
-  phoneLabel: "Telefon raqamingiz",
-  phonePlaceholder: "+998 XX XXX XX XX",
-  submit: "Xabar yuborish",
-  sending: "Yuborilmoqda...",
-  formSuccess: "Rahmat! Tez orada siz bilan bog'lanamiz.",
-  address: "Manzil",
-  phone: "Telefon",
-  landmark: "Mo'ljal",
-  workHours: "Ish vaqti",
-};
 
 interface FormData {
   name: string;
@@ -29,12 +14,55 @@ type SubmitStatus = null | "sending" | "success";
 
 export default function Contact() {
   const { theme } = useTheme();
+  const { language } = useLanguage();
+  const { webData } = useWebDataStore();
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
   });
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
   const [showAddress, setShowAddress] = useState(false);
+
+  // Localized text data
+  const contactData = {
+    title: language === "uz" ? "Bizning Manzil" : "Our Location",
+    contactTitle: language === "uz" ? "Biz bilan bog'lanish" : "Contact Us",
+    addressTitle: language === "uz" ? "Manzilimiz" : "Our Address",
+    nameLabel: language === "uz" ? "Ismingiz" : "Your Name",
+    namePlaceholder:
+      language === "uz" ? "Ismingizni kiriting" : "Enter your name",
+    phoneLabel: language === "uz" ? "Telefon raqamingiz" : "Your Phone Number",
+    phonePlaceholder: "+998 XX XXX XX XX",
+    submit: language === "uz" ? "Xabar yuborish" : "Send Message",
+    sending: language === "uz" ? "Yuborilmoqda..." : "Sending...",
+    formSuccess:
+      language === "uz"
+        ? "Rahmat! Tez orada siz bilan bog'lanamiz."
+        : "Thank you! We'll contact you soon.",
+    address: language === "uz" ? "Manzil" : "Address",
+    phone: language === "uz" ? "Telefon" : "Phone",
+    landmark: language === "uz" ? "Mo'ljal" : "Landmark",
+    workHours: language === "uz" ? "Ish vaqti" : "Working Hours",
+  };
+
+  // Get address and other contact details from webData
+  const address = webData
+    ? getLocalizedText(webData.address_uz, webData.address_en, language)
+    : "";
+
+  const landmark = webData
+    ? getLocalizedText(webData.orientation_uz, webData.orientation_en, language)
+    : "";
+
+  const workTime = webData?.work_time ?? "";
+  const workTimeSunday = webData?.work_time_sunday ?? "";
+
+  const mainPhone = webData?.main_phone?.phone ?? "";
+  const additionalPhones =
+    webData?.web_phones
+      ?.map((item) => item.phone.phone)
+      .filter((phone) => phone !== mainPhone) || [];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -187,25 +215,26 @@ export default function Contact() {
                     <div className={styles.addressDetails}>
                       <div className={styles.addressItem}>
                         <h4>{contactData.address}</h4>
-                        <p>23 Bobur Street, Fergana, Uzbekistan</p>
+                        <p>{address}</p>
                       </div>
 
                       <div className={styles.addressItem}>
                         <h4>{contactData.landmark}</h4>
-                        <p>Near Central Park, 300m from City Mall</p>
+                        <p>{landmark}</p>
                       </div>
 
                       <div className={styles.addressItem}>
                         <h4>{contactData.workHours}</h4>
-                        <p>Monday-Friday: 9:00 - 19:00</p>
-                        <p>Saturday: 10:00 - 16:00</p>
-                        <p>Sunday: Closed</p>
+                        <p>{workTime}</p>
+                        <p>{workTimeSunday}</p>
                       </div>
 
                       <div className={styles.addressItem}>
                         <h4>{contactData.phone}</h4>
-                        <p>+998 90 123 45 67</p>
-                        <p>+998 90 123 45 68</p>
+                        <p>{mainPhone}</p>
+                        {additionalPhones.map((phone, index) => (
+                          <p key={index}>{phone}</p>
+                        ))}
                       </div>
                     </div>
                   </div>

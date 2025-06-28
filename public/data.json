@@ -1,0 +1,694 @@
+{
+  "id": 1,
+  "header_img": "https://images.unsplash.com/photo-1531482615713-2c65769502b0?q=80&w=2070&auto=format&fit=crop",
+  "header_h1_uz": "Bizning mutaxassis til ko'rsatmalari bilan o'zingizning salohiyatingizni oshiring",
+  "header_h1_en": "Increase your potential with our expert language guidance",
+  "about_p1_uz": "2015 yilda asos solingan Admire o'quv markazi, talabalarni o'z salohiyatini ro'yobga chiqarishga yordam beruvchi yuqori sifatli ta'lim berish bilan shug'ullanadi.",
+  "about_p1_en": "Founded in 2015, Admire learning center is dedicated to providing high-quality education that helps students realize their potential.",
+  "about_p2_uz": "Bizning maqsadimiz ilmiy va amaliy qobiliyatlarni rivojlantirishga undaydigan va ta'lim jarayonida sifatni namoyish etadigan o'quv muhitini yaratishdir.",
+  "about_p2_en": "Our goal is to create a learning environment that encourages the development of academic and practical skills and demonstrates quality in the educational process.",
+  "total_students": 500,
+  "best_students": 20,
+  "total_teachers": 15,
+  "gallery_p_uz": "Bizning galereyamizda siz Admire o'quv markazining hayotidan lavhalar, tadbirlar va yutuqlar aks etgan suratlarni topasiz. Ushbu galereya orqali bizning faoliyatimiz va muhitimiz bilan yaqindan tanishishingiz mumkin.",
+  "gallery_p_en": "In our gallery, you will find photos capturing moments from the life, events, and achievements of Admire Learning Center. Through this gallery, you can get a closer look at our activities and environment.",
+  "teachers_p_uz": "Bizning tajribali o'qituvchilarimiz har bir o'quvchining muvaffaqiyati uchun astoydil harakat qilishadi. Ular zamonaviy metodikalardan foydalangan holda, bilim va ko'nikmalarini o'rgatishadi hamda doimiy ravishda o'z ustida ishlashadi.",
+  "teachers_p_en": "Our experienced teachers are dedicated to the success of every student. They use modern teaching methods, share their knowledge and skills, and are constantly improving themselves.",
+  "students_p_uz": "Bizning o'quvchilarimiz turli yosh va darajadagi insonlardir. Ular o'z maqsadlariga erishish uchun intilishadi va Admire o'quv markazida bilim olish jarayonidan zavqlanishadi.",
+  "students_p_en": "Our students are people of different ages and levels. They strive to achieve their goals and enjoy the learning process at Admire Learning Center.",
+  "address_uz": "23 Bobur ko'chasi, Andijon, O'zbekiston",
+  "address_en": "23 Bobur street, Andijan, Uzbekistan",
+  "orientation_uz": "Eski shahar to'g'risida",
+  "orientation_en": "Old city",
+  "work_time": "9:00 - 19:00",
+  "work_time_sunday": "Yopiq",
+  "footer_p_uz": "Kelajakni ta'lim orqali qurish",
+  "footer_p_en": "Building the future through education",
+  "main_phone_id": 1,
+  "email": "contact@admire.edu",
+  "extended_address_uz": "Andijon shahri, Bobur shoh ko'chasi, 23-uy. Mo'ljal: Eski shahar markazi.",
+  "extended_address_en": "23 Bobur avenue, Andijan city. Landmark: Old city center.",
+  "is_active": true,
+  "main_phone": {
+    "id": 1,
+    "phone": "+998 90 123 45 68"
+  },
+  "web_media": [
+    {
+      "id": 1,
+      "order": 1,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 1,
+      "media": {
+        "id": 1,
+        "name": "Admire Learning Center Building",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 2,
+      "order": 2,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 4,
+      "media": {
+        "id": 4,
+        "name": "Library",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "size": "1x2",
+      "web_id": 1,
+      "media_id": 2,
+      "media": {
+        "id": 2,
+        "name": "Classroom",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-5s.mp4"
+      }
+    },
+    {
+      "id": 4,
+      "order": 4,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 3,
+      "media": {
+        "id": 3,
+        "name": "Students studying",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-5s.mp4"
+      }
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 1,
+      "media": {
+        "id": 1,
+        "name": "Admire Learning Center Building",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 6,
+      "order": 6,
+      "size": "1x2",
+      "web_id": 1,
+      "media_id": 4,
+      "media": {
+        "id": 4,
+        "name": "Library",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-10s.mp4"
+      }
+    },
+    {
+      "id": 7,
+      "order": 7,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 2,
+      "media": {
+        "id": 2,
+        "name": "Classroom",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 8,
+      "order": 8,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 3,
+      "media": {
+        "id": 3,
+        "name": "Students studying",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 9,
+      "order": 9,
+      "size": "1x2",
+      "web_id": 1,
+      "media_id": 1,
+      "media": {
+        "id": 1,
+        "name": "Admire Learning Center Building",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-15s.mp4"
+      }
+    },
+    {
+      "id": 10,
+      "order": 10,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 4,
+      "media": {
+        "id": 4,
+        "name": "Library",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 11,
+      "order": 11,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 2,
+      "media": {
+        "id": 2,
+        "name": "Classroom",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 12,
+      "order": 12,
+      "size": "1x2",
+      "web_id": 1,
+      "media_id": 3,
+      "media": {
+        "id": 3,
+        "name": "Students studying",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-20s.mp4"
+      }
+    },
+    {
+      "id": 13,
+      "order": 13,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 5,
+      "media": {
+        "id": 5,
+        "name": "Language Lab",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 14,
+      "order": 14,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 6,
+      "media": {
+        "id": 6,
+        "name": "Student Lounge",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 15,
+      "order": 15,
+      "size": "1x2",
+      "web_id": 1,
+      "media_id": 7,
+      "media": {
+        "id": 7,
+        "name": "Group Discussion",
+        "is_video": true,
+        "url": "https://download.samplelib.com/mp4/sample-30s.mp4"
+      }
+    },
+    {
+      "id": 16,
+      "order": 16,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 8,
+      "media": {
+        "id": 8,
+        "name": "Computer Lab",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    },
+    {
+      "id": 17,
+      "order": 17,
+      "size": "1x1",
+      "web_id": 1,
+      "media_id": 9,
+      "media": {
+        "id": 9,
+        "name": "Graduation Day",
+        "is_video": false,
+        "url": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      }
+    }
+  ],
+  "web_phones": [
+    {
+      "id": 1,
+      "web_id": 1,
+      "phone_id": 2,
+      "phone": {
+        "id": 2,
+        "phone": "+998 90 123 45 68"
+      }
+    },
+    {
+      "id": 2,
+      "web_id": 1,
+      "phone_id": 1,
+      "phone": {
+        "id": 1,
+        "phone": "+998 90 123 45 67"
+      }
+    }
+  ],
+  "web_socials": [
+    {
+      "id": 1,
+      "web_id": 1,
+      "social_id": 3,
+      "social": {
+        "id": 3,
+        "name": "Instagram",
+        "url": "https://instagram.com/admire",
+        "icon_id": 2,
+        "icon": {
+          "id": 2,
+          "name": "Instagram",
+          "url": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/instagram.svg"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "web_id": 1,
+      "social_id": 2,
+      "social": {
+        "id": 2,
+        "name": "Facebook",
+        "url": "https://facebook.com/admire",
+        "icon_id": 1,
+        "icon": {
+          "id": 1,
+          "name": "Facebook",
+          "url": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/facebook.svg"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "web_id": 1,
+      "social_id": 1,
+      "social": {
+        "id": 1,
+        "name": "YouTube",
+        "url": "https://youtube.com/admire",
+        "icon_id": 4,
+        "icon": {
+          "id": 4,
+          "name": "YouTube",
+          "url": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/youtube.svg"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "web_id": 1,
+      "social_id": 4,
+      "social": {
+        "id": 4,
+        "name": "Telegram",
+        "url": "https://t.me/admire",
+        "icon_id": 3,
+        "icon": {
+          "id": 3,
+          "name": "Telegram",
+          "url": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telegram.svg"
+        }
+      }
+    }
+  ],
+  "web_students": [
+    {
+      "id": 1,
+      "order": 3,
+      "web_id": 1,
+      "student_id": 3,
+      "student": {
+        "id": 3,
+        "name": "Kamila",
+        "surname": "Usmanova",
+        "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.5,
+        "listening": 8,
+        "reading": 7,
+        "writing": 7,
+        "speaking": 7.5,
+        "cefr": "B2",
+        "review_uz": "Ingliz tilini o'rganish va IELTS ga tayyorlanish uchun ajoyib joy. Rahmat Admire!",
+        "review_en": "A great place to learn English and prepare for IELTS. Thank you Admire!"
+      }
+    },
+    {
+      "id": 2,
+      "order": 1,
+      "web_id": 1,
+      "student_id": 1,
+      "student": {
+        "id": 1,
+        "name": "Madina",
+        "surname": "Alieva",
+        "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8.5,
+        "listening": 9,
+        "reading": 8.5,
+        "writing": 8,
+        "speaking": 8,
+        "cefr": "C1",
+        "review_uz": "Admire haqiqatan ham ingliz tilini yaxshilashimga va universitet uchun kerak bo'lgan ballni olishimga yordam berdi.",
+        "review_en": "Admire really helped me to improve my English and get the score I needed for university."
+      }
+    },
+    {
+      "id": 3,
+      "order": 2,
+      "web_id": 1,
+      "student_id": 2,
+      "student": {
+        "id": 2,
+        "name": "Javohir",
+        "surname": "Karimov",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8,
+        "listening": 8.5,
+        "reading": 8.5,
+        "writing": 7,
+        "speaking": 7.5,
+        "cefr": "C1",
+        "review_uz": "O'qituvchilar juda professional va qo'llab-quvvatlovchi. Bu markazni yuqori darajada tavsiya qilaman.",
+        "review_en": "The teachers are very professional and supportive. I highly recommend this center."
+      }
+    },
+    {
+      "id": 4,
+      "order": 4,
+      "web_id": 1,
+      "student_id": 4,
+      "student": {
+        "id": 4,
+        "name": "Aziza",
+        "surname": "Rakhimova",
+        "image": "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.0,
+        "listening": 7.5,
+        "reading": 7,
+        "writing": 6.5,
+        "speaking": 7,
+        "cefr": "B2",
+        "review_uz": "IELTS imtihoniga tayyorgarlik jarayonida juda ko'p yordam oldim. O'qituvchilar juda sabrli va tushunarli.",
+        "review_en": "I received a lot of help during my IELTS preparation. The teachers are very patient and understanding."
+      }
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "web_id": 1,
+      "student_id": 5,
+      "student": {
+        "id": 5,
+        "name": "Dilshod",
+        "surname": "Tursunov",
+        "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8.0,
+        "listening": 8.5,
+        "reading": 8,
+        "writing": 7.5,
+        "speaking": 8,
+        "cefr": "C1",
+        "review_uz": "Chetdagi universitetga o'qishga kirish uchun kerakli ballni oldim. Admire rahmat!",
+        "review_en": "I got the score I needed to enter a foreign university. Thank you Admire!"
+      }
+    },
+    {
+      "id": 6,
+      "order": 6,
+      "web_id": 1,
+      "student_id": 6,
+      "student": {
+        "id": 6,
+        "name": "Nilufar",
+        "surname": "Khamidova",
+        "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.5,
+        "listening": 8,
+        "reading": 7.5,
+        "writing": 7,
+        "speaking": 7.5,
+        "cefr": "B2",
+        "review_uz": "Ingliz tilini o'rganishda juda yaxshi tajriba. O'qituvchilar har bir talabaga alohida e'tibor beradi.",
+        "review_en": "Great experience learning English. Teachers pay individual attention to each student."
+      }
+    },
+    {
+      "id": 7,
+      "order": 7,
+      "web_id": 1,
+      "student_id": 7,
+      "student": {
+        "id": 7,
+        "name": "Sardor",
+        "surname": "Ismoilov",
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.0,
+        "listening": 7.5,
+        "reading": 7.0,
+        "writing": 6.5,
+        "speaking": 7.0,
+        "cefr": "B2",
+        "review_uz": "Admire'da o'qish mening karyeramda katta o'zgarishlarga olib keldi. Juda minnatdorman!",
+        "review_en": "Studying at Admire led to big changes in my career. I'm very grateful!"
+      }
+    },
+    {
+      "id": 8,
+      "order": 8,
+      "web_id": 1,
+      "student_id": 8,
+      "student": {
+        "id": 8,
+        "name": "Gulnora",
+        "surname": "Saidova",
+        "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8.0,
+        "listening": 8.5,
+        "reading": 8.0,
+        "writing": 7.5,
+        "speaking": 8.0,
+        "cefr": "C1",
+        "review_uz": "Admire'dagi o'qituvchilar juda bilimli va sabrli. Ular tufayli maqsadimga erishdim.",
+        "review_en": "The teachers at Admire are very knowledgeable and patient. Thanks to them I achieved my goal."
+      }
+    },
+    {
+      "id": 9,
+      "order": 9,
+      "web_id": 1,
+      "student_id": 9,
+      "student": {
+        "id": 9,
+        "name": "Akmal",
+        "surname": "Yusupov",
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.5,
+        "listening": 8.0,
+        "reading": 7.5,
+        "writing": 7.0,
+        "speaking": 7.5,
+        "cefr": "B2",
+        "review_uz": "Admire'da o'qish davomida nafaqat ingliz tilini, balki ko'p hayotiy ko'nikmalarni ham o'rgandim.",
+        "review_en": "During my studies at Admire, I learned not only English but also many life skills."
+      }
+    },
+    {
+      "id": 10,
+      "order": 10,
+      "web_id": 1,
+      "student_id": 10,
+      "student": {
+        "id": 10,
+        "name": "Feruza",
+        "surname": "Abdullaeva",
+        "image": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8.5,
+        "listening": 9.0,
+        "reading": 8.5,
+        "writing": 8.0,
+        "speaking": 8.5,
+        "cefr": "C1",
+        "review_uz": "Admire'dagi o'quv jarayoni juda samarali va qiziqarli. Har bir dars yangi bilimlar bilan to'la.",
+        "review_en": "The learning process at Admire is very effective and interesting. Each lesson is full of new knowledge."
+      }
+    },
+    {
+      "id": 11,
+      "order": 11,
+      "web_id": 1,
+      "student_id": 11,
+      "student": {
+        "id": 11,
+        "name": "Bobur",
+        "surname": "Rahimov",
+        "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.0,
+        "listening": 7.5,
+        "reading": 7.0,
+        "writing": 6.5,
+        "speaking": 7.0,
+        "cefr": "B2",
+        "review_uz": "Admire'da o'qish mening hayotimni o'zgartirdi. Endi chet elda o'qish imkoniyatiga egaman.",
+        "review_en": "Studying at Admire changed my life. Now I have the opportunity to study abroad."
+      }
+    },
+    {
+      "id": 12,
+      "order": 12,
+      "web_id": 1,
+      "student_id": 12,
+      "student": {
+        "id": 12,
+        "name": "Malika",
+        "surname": "Karimova",
+        "image": "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?q=80&w=1889&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 8.0,
+        "listening": 8.5,
+        "reading": 8.0,
+        "writing": 7.5,
+        "speaking": 8.0,
+        "cefr": "C1",
+        "review_uz": "Admire'dagi o'qituvchilar har bir talabaga individual yondashadi. Bu juda muhim.",
+        "review_en": "Teachers at Admire have an individual approach to each student. This is very important."
+      }
+    },
+    {
+      "id": 13,
+      "order": 13,
+      "web_id": 1,
+      "student_id": 13,
+      "student": {
+        "id": 13,
+        "name": "Rustam",
+        "surname": "Alimov",
+        "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=1748&auto=format&fit=crop",
+        "certificate_photo": "https://images.ctfassets.net/unrdeg6se4ke/1xYhqY3QVFQMD5O2uo8rWU/f120854e1fae82d7b45b7a78f4396b8a/example-of-ielts-test-report-form.jpg?&fm=avif&w=1220",
+        "overall": 7.5,
+        "listening": 8.0,
+        "reading": 7.5,
+        "writing": 7.0,
+        "speaking": 7.5,
+        "cefr": "B2",
+        "review_uz": "Admire'da o'qish davomida ko'p do'stlar ortirdim va ingliz tilini mukammal o'rgandim.",
+        "review_en": "During my studies at Admire, I made many friends and learned English perfectly."
+      }
+    }
+  ],
+  "web_teachers": [
+    {
+      "id": 1,
+      "order": 2,
+      "web_id": 1,
+      "teacher_id": 2,
+      "teacher": {
+        "id": 2,
+        "name": "Asilbek",
+        "surname": "Rustamov",
+        "about_uz": "Imtihonlarga tayyorgarlik ko'rishga ixtisoslashgan tajribali o'qituvchi.",
+        "about_en": "Experienced teacher specializing in exam preparation.",
+        "quote_uz": "Talabalarning orzularini ro'yobga chiqarishga yordam berish mening ehtirosimdir.",
+        "quote_en": "Helping students achieve their dreams is my passion.",
+        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop",
+        "overall": 8.5,
+        "listening": 8.5,
+        "reading": 9,
+        "writing": 8,
+        "speaking": 8.5,
+        "cefr": "C1",
+        "experience": 8,
+        "students": 1200
+      }
+    },
+    {
+      "id": 2,
+      "order": 1,
+      "web_id": 1,
+      "teacher_id": 3,
+      "teacher": {
+        "id": 3,
+        "name": "Dovudxon",
+        "surname": "Abdullaev",
+        "about_uz": "O'zbekistonda 8-marta IELTS 9.0 ballni qo'lga kiritdim, va bu mening o'zimga bo'lgan ishonchimni yanada oshirdi. Talabalarimning yaxshi natijaga erishishlari uchun barcha bo'limlarga e'tibor qarataman. Ularning natijasi bu mening natijam, shuning uchun har bir talabani o'rgatayotganda, ularni muvaffaqiyatli qilishni o'zimning burchim deb bilaman.",
+        "about_en": "I achieved an IELTS score of 9.0 for the 8th time in Uzbekistan, which further increased my self-confidence. I pay attention to all sections to help my students achieve good results. Their result is my result, so when teaching each student, I consider it my duty to make them successful.",
+        "quote_uz": "10+ yillik tajribaga ega IELTS o'qituvchisi, talabalarga maqsadli ballarini olishga yordam beradi.",
+        "quote_en": "An IELTS teacher with 10+ years of experience, helping students achieve their target scores.",
+        "image": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop",
+        "overall": 9,
+        "listening": 9,
+        "reading": 9,
+        "writing": 9,
+        "speaking": 9,
+        "cefr": "C2",
+        "experience": 10,
+        "students": 3500
+      }
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "web_id": 1,
+      "teacher_id": 1,
+      "teacher": {
+        "id": 1,
+        "name": "Sarah",
+        "surname": "Johnson",
+        "about_uz": "CELTA sertifikatiga ega fidoyi o'qituvchi.",
+        "about_en": "A dedicated CELTA-certified instructor.",
+        "quote_uz": "Har bir talabaning salohiyatini ochish mening asosiy maqsadimdir.",
+        "quote_en": "Unlocking each student's potential is my primary goal.",
+        "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop",
+        "overall": 8.5,
+        "listening": 9,
+        "reading": 8.5,
+        "writing": 8,
+        "speaking": 8.5,
+        "cefr": "C1",
+        "experience": 7,
+        "students": 1000
+      }
+    }
+  ]
+}

@@ -1,48 +1,9 @@
 import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import useWebDataStore from "@/store/useWebDataStore";
+import { getLocalizedText } from "@/utils/localization";
 import styles from "./Footer.module.scss";
-
-// Static footer data
-const footerData = {
-  brand: {
-    tagline: "Kelajakni ta'lim orqali qurish",
-  },
-  navigation: {
-    title: "Tezkor havolalar",
-    links: [
-      { text: "Biz haqimizda", sectionId: "about" },
-      { text: "Xodimlarimiz", sectionId: "teachers" },
-      { text: "Talabalar", sectionId: "students" },
-      { text: "Bog'lanish", sectionId: "contact" },
-    ],
-  },
-  contact: {
-    title: "Biz bilan bog'lanish",
-    items: [
-      { type: "phone", text: "+998 90 123 45 67" },
-      { type: "email", text: "contact@admire.edu" },
-      { type: "address", text: "23 Bobur ko'chasi, Andijon, O'zbekiston" },
-    ],
-  },
-  social: {
-    title: "Ijtimoiy tarmoqlar",
-    links: [
-      { platform: "youtube", url: "#", title: "YouTube" },
-      { platform: "instagram", url: "#", title: "Instagram" },
-      { platform: "telegram", url: "#", title: "Telegram" },
-      { platform: "facebook", url: "#", title: "Facebook" },
-      { platform: "linkedin", url: "#", title: "LinkedIn" },
-    ],
-  },
-  copyright: {
-    text: "Admire Learning Center. Barcha huquqlar himoyalangan.",
-    legal: [
-      { text: "Foydalanish shartlari", url: "#" },
-      { text: "Maxfiylik siyosati", url: "#" },
-      { text: "Cookie siyosati", url: "#" },
-    ],
-  },
-};
 
 // Icon components
 const PhoneIcon = () => (
@@ -228,7 +189,87 @@ const getSocialIcon = (platform: string) => {
 
 export default function Footer() {
   const { theme } = useTheme();
+  const { language } = useLanguage();
+  const { webData } = useWebDataStore();
   const currentYear = new Date().getFullYear();
+
+  // Get localized footer tagline
+  const footerTagline = webData
+    ? getLocalizedText(webData.footer_p_uz, webData.footer_p_en, language)
+    : "";
+
+  // Localized footer data
+  const footerData = {
+    brand: {
+      tagline: footerTagline,
+    },
+    navigation: {
+      title: language === "uz" ? "Tezkor havolalar" : "Quick Links",
+      links: [
+        {
+          text: language === "uz" ? "Biz haqimizda" : "About Us",
+          sectionId: "about",
+        },
+        {
+          text: language === "uz" ? "Xodimlarimiz" : "Our Teachers",
+          sectionId: "teachers",
+        },
+        {
+          text: language === "uz" ? "Talabalar" : "Students",
+          sectionId: "students",
+        },
+        {
+          text: language === "uz" ? "Bog'lanish" : "Contact",
+          sectionId: "contact",
+        },
+      ],
+    },
+    contact: {
+      title: language === "uz" ? "Biz bilan bog'lanish" : "Contact Us",
+      items: webData
+        ? [
+            {
+              type: "phone",
+              text: webData.main_phone?.phone ?? "",
+            },
+            { type: "email", text: webData.email ?? "" },
+            {
+              type: "address",
+              text: getLocalizedText(
+                webData.address_uz,
+                webData.address_en,
+                language
+              ),
+            },
+          ]
+        : [],
+    },
+    social: {
+      title: language === "uz" ? "Ijtimoiy tarmoqlar" : "Social Media",
+      links:
+        webData?.web_socials?.map((item) => ({
+          platform: item.social.name.toLowerCase(),
+          url: item.social.url,
+          title: item.social.name,
+        })) || [],
+    },
+    copyright: {
+      text:
+        language === "uz"
+          ? "Admire Learning Center. Barcha huquqlar himoyalangan."
+          : "Admire Learning Center. All rights reserved.",
+      legal: [
+        {
+          text: language === "uz" ? "Foydalanish shartlari" : "Terms of Use",
+          url: "#",
+        },
+        {
+          text: language === "uz" ? "Maxfiylik siyosati" : "Privacy Policy",
+          url: "#",
+        },
+      ],
+    },
+  };
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string, e: React.MouseEvent) => {

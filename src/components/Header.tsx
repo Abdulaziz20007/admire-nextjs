@@ -1,9 +1,14 @@
 import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import useWebDataStore from "@/store/useWebDataStore";
+import { getLocalizedText } from "@/utils/localization";
 import styles from "./Header.module.scss";
 
 export default function Header() {
   const { theme } = useTheme();
+  const { language } = useLanguage();
+  const { webData } = useWebDataStore();
 
   // Smooth scroll function (similar to navbar implementation)
   const scrollToSection = (sectionId: string) => {
@@ -26,6 +31,9 @@ export default function Header() {
     }
   };
 
+  // Get localized button text
+  const buttonText = language === "uz" ? "Boshlash" : "Get Started";
+
   return (
     <header
       id="home"
@@ -37,11 +45,17 @@ export default function Header() {
           {/* Left side - Building Image */}
           <div className={styles.imageSection}>
             <div className={styles.imageContainer}>
-              <img
-                src="/img/header photo.png"
-                alt="Admire Learning Center Building"
-                className={styles.buildingImage}
-              />
+              {webData?.header_img && (
+                <img
+                  src={webData.header_img}
+                  alt={
+                    language === "uz"
+                      ? "Admire o'quv markazi binosi"
+                      : "Admire Learning Center Building"
+                  }
+                  className={styles.buildingImage}
+                />
+              )}
             </div>
           </div>
 
@@ -49,14 +63,20 @@ export default function Header() {
           <div className={styles.textSection}>
             <div className={styles.textContent}>
               <h1 className={styles.mainHeading}>
-                Admire Ingliz tili o'rganish markazi
+                {language === "uz"
+                  ? "Admire Ingliz tili o'rganish markazi"
+                  : "Admire English Learning Center"}
               </h1>
               <p className={styles.subtitle}>
-                Bizning mutaxassis til ko'rsatmalari bilan o'zingizning
-                salohiyatingizni oshiriq
+                {webData &&
+                  getLocalizedText(
+                    webData.header_h1_uz,
+                    webData.header_h1_en,
+                    language
+                  )}
               </p>
               <div className={styles.buttonGroup}>
-                <button className={styles.ctaButton}>Boshlash</button>
+                <button className={styles.ctaButton}>{buttonText}</button>
               </div>
             </div>
           </div>

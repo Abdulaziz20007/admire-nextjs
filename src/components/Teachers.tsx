@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import useWebDataStore from "@/store/useWebDataStore";
+import { getLocalizedText } from "@/utils/localization";
 import styles from "./Teachers.module.scss";
 
 // Teacher data interface
@@ -15,100 +18,6 @@ interface Teacher {
   quote: string;
   image: string;
 }
-
-// Static teacher data
-const teachersData: Teacher[] = [
-  {
-    id: 1,
-    name: "Dovudxon",
-    subtitle: "Abdullaev",
-    about:
-      "10+ yillik tajribaga ega IELTS o'qituvchisi, talabalarga maqsadli ballarini olishga yordam beradi.",
-    overallScore: "9.0",
-    scoreDisplay: "9.0",
-    yearsExperience: "10+",
-    studentsCount: "3500+",
-    quote:
-      "O'zbekistonda 8-marta IELTS 9.0 ballni qo'lga kiritdim, va bu mening o'zimga bo'lgan ishonchimni yanada oshirdi. Talabalarimning yaxshi natijaga erishishlari uchun barcha bo'limlarga e'tibor qarataman. Ularning natijasi bu mening natijam, shuning uchun har bir talabani o'rgatayotganda, ularni muvaffaqiyatli qilishni o'zimning burchim deb bilaman.",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=faces,top",
-  },
-  {
-    id: 2,
-    name: "Asilbek",
-    subtitle: "Yusupov",
-    about:
-      "IELTS uchun akademik yozuv va o'qish ko'nikmalarida ixtisoslashgan.",
-    overallScore: "9.0",
-    scoreDisplay: "3x9.0",
-    yearsExperience: "5+",
-    studentsCount: "3000+",
-    quote:
-      "Men ketma-ket 3 marta IELTS 9.0 ballni oldim. Imkonsiz so'z men uchun emas, va buni siz mening talabalarim natijalarida ko'rishingiz mumkin. Aniq strategiya va yuqori ruh bilan dars o'tish mening kuchli tomonlarimdan biri. Qolganlarini siz darslarimga kelganingizda ko'rishingiz mumkin.",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500&fit=crop&crop=faces,top",
-  },
-  {
-    id: 3,
-    name: "Sarah",
-    subtitle: "Johnson",
-    about:
-      "Yuqori IELTS ballarini olish uchun gapirish ishonchi va talaffuz qilishga e'tibor beradi.",
-    overallScore: "8.5",
-    scoreDisplay: "8.5",
-    yearsExperience: "7+",
-    studentsCount: "2500+",
-    quote:
-      "Tilshunoslik va ta'lim sohasidagi tajriba bilan, men talabalarga nafaqat IELTS balki akademik va professionallik sohalarida ham xizmat qiladigan haqiqiy muloqot ko'nikmalarini rivojlantirishga yordam beraman.",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&h=500&fit=crop&crop=faces,top",
-  },
-  {
-    id: 4,
-    name: "Michael",
-    subtitle: "Smith",
-    about:
-      "Yozish va gapirish ballarini yaxshilash uchun sinovdan o'tgan usullarga ega grammatika mutaxassisi.",
-    overallScore: "8.0",
-    scoreDisplay: "8.0",
-    yearsExperience: "8+",
-    studentsCount: "2800+",
-    quote:
-      "IELTS tayyorgarligiga mening maxsus yondashuvim har bir talabaning zaif tomonlarini tizimli ravishda aniqlash va ularga murojaat qilishga qaratilgan. Men barcha to'rtta modulda muvaffaqiyatga erishish uchun grammatika va so'z boyligida mustahkam poydevor yaratishga ishonaman.",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop&crop=faces,top",
-  },
-  {
-    id: 5,
-    name: "Emily",
-    subtitle: "Wilson",
-    about:
-      "Tilshunoslik sohasida tajribaga ega o'qish va tinglash strategiyalari bo'yicha mutaxassis.",
-    overallScore: "8.5",
-    scoreDisplay: "8.5",
-    yearsExperience: "6+",
-    studentsCount: "2200+",
-    quote:
-      "Men o'z talabalarimga IELTS shunchaki test emas, balki ularning akademik va kasbiy faoliyati davomida foydali bo'ladigan til ko'nikmalarini rivojlantirish imkoniyati ekanligini o'rgataman. Mening dalillarga asoslangan usullarim yuzlab talabalarga maqsadli ballarini olishga yordam berdi.",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=500&fit=crop&crop=faces,top",
-  },
-  {
-    id: 6,
-    name: "David",
-    subtitle: "Lee",
-    about:
-      "IELTS muvaffaqiyati uchun test tayyorgarligi va vaqtni boshqarish texnikalarida ixtisoslashgan.",
-    overallScore: "8.0",
-    scoreDisplay: "8.0",
-    yearsExperience: "9+",
-    studentsCount: "3100+",
-    quote:
-      "Mening yondashuvim samarali vaqtni boshqarish strategiyalari bilan psixologik tayyorgarlikni birlashtiradi. IELTS muvaffaqiyati til bilimi kabi ishonch va test strategiyasi ham hisoblanadi, va men o'z talabalarimning barcha jihatlarda tayyor bo'lishini ta'minlayman.",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=faces,top",
-  },
-];
 
 // Teacher Avatar Component
 interface TeacherAvatarProps {
@@ -149,9 +58,18 @@ const TeacherAvatar: React.FC<TeacherAvatarProps> = ({
 // Teacher Detail Component
 interface TeacherDetailProps {
   teacher: Teacher;
+  metricLabels: {
+    score: string;
+    experience: string;
+    certification: string;
+    students: string;
+  };
 }
 
-const TeacherDetail: React.FC<TeacherDetailProps> = ({ teacher }) => {
+const TeacherDetail: React.FC<TeacherDetailProps> = ({
+  teacher,
+  metricLabels,
+}) => {
   return (
     <div className={styles.teacherDetail}>
       <div className={styles.teacherPhotoWrapper}>
@@ -173,12 +91,12 @@ const TeacherDetail: React.FC<TeacherDetailProps> = ({ teacher }) => {
       <div className={styles.teacherMetrics}>
         <div className={styles.teacherMetric}>
           <div className={styles.metricValue}>{teacher.scoreDisplay}</div>
-          <div className={styles.metricLabel}>IELTS bali</div>
+          <div className={styles.metricLabel}>{metricLabels.score}</div>
         </div>
 
         <div className={styles.teacherMetric}>
-          <div className={styles.metricValue}>{teacher.yearsExperience}</div>
-          <div className={styles.metricLabel}>Yillik tajriba</div>
+          <div className={styles.metricValue}>{teacher.yearsExperience}+</div>
+          <div className={styles.metricLabel}>{metricLabels.experience}</div>
         </div>
 
         <div className={styles.teacherMetric}>
@@ -187,8 +105,8 @@ const TeacherDetail: React.FC<TeacherDetailProps> = ({ teacher }) => {
         </div>
 
         <div className={styles.teacherMetric}>
-          <div className={styles.metricValue}>{teacher.studentsCount}</div>
-          <div className={styles.metricLabel}>Talabalar</div>
+          <div className={styles.metricValue}>{teacher.studentsCount}+</div>
+          <div className={styles.metricLabel}>{metricLabels.students}</div>
         </div>
       </div>
 
@@ -204,17 +122,60 @@ const TeacherDetail: React.FC<TeacherDetailProps> = ({ teacher }) => {
 // Main Teachers Component
 export default function Teachers() {
   const { theme } = useTheme();
+  const { language } = useLanguage();
+  const { webData } = useWebDataStore();
   const [activeTeacher, setActiveTeacher] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
   const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Get teachers from web data
+  const teachers =
+    webData?.web_teachers?.map((item) => ({
+      id: item.teacher_id,
+      name: item.teacher.name,
+      subtitle: item.teacher.surname,
+      about: getLocalizedText(
+        item.teacher.about_uz,
+        item.teacher.about_en,
+        language
+      ),
+      overallScore: item.teacher.overall.toString(),
+      scoreDisplay: item.teacher.overall.toString(),
+      yearsExperience: item.teacher.experience.toString(),
+      studentsCount: item.teacher.students.toString(),
+      quote: getLocalizedText(
+        item.teacher.quote_uz,
+        item.teacher.quote_en,
+        language
+      ),
+      image: item.teacher.image,
+    })) || [];
+
+  // Get localized section title
+  const sectionTitle =
+    language === "uz"
+      ? "Bizning o'qituvchilarimiz"
+      : "Our Experienced Teachers";
+
+  const sectionDescription = webData
+    ? getLocalizedText(webData.teachers_p_uz, webData.teachers_p_en, language)
+    : "";
+
+  // Localized metric labels
+  const metricLabels = {
+    score: language === "uz" ? "IELTS bali" : "IELTS score",
+    experience: language === "uz" ? "Yillik tajriba" : "Years of experience",
+    certification: language === "uz" ? "Sertifikatlangan" : "Certified",
+    students: language === "uz" ? "Talabalar" : "Students",
+  };
 
   // Handle auto-rotation
   useEffect(() => {
     const rotationInterval = setInterval(() => {
       if (!isPaused) {
         handleTeacherChange((prevIndex) =>
-          prevIndex === teachersData.length - 1 ? 0 : prevIndex + 1
+          prevIndex === teachers.length - 1 ? 0 : prevIndex + 1
         );
       }
     }, 5000);
@@ -286,18 +247,16 @@ export default function Teachers() {
       <div className={styles.container}>
         <div className={styles.staffContentWrapper}>
           <div className={styles.staffHeader}>
-            <h2 className={styles.sectionTitle}>
-              Bizning tajribali o'qituvchilarimiz
-            </h2>
-            <p className={styles.sectionDescription}>
-              Talabalarning maqsadli ballarini olishga yordam berishda
-              isbotlangan tajribaga ega yuqori malakali IELTS o'qituvchilarimiz
-              bilan tanishing.
-            </p>
+            <h2 className={styles.sectionTitle}>{sectionTitle}</h2>
+            <p className={styles.sectionDescription}>{sectionDescription}</p>
           </div>
 
-          <div className={styles.teachersAvatarsContainer}>
-            {teachersData.map((teacher, index) => (
+          <div
+            className={styles.teachersAvatarsContainer}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {teachers.map((teacher, index) => (
               <TeacherAvatar
                 key={teacher.id}
                 teacher={teacher}
@@ -311,10 +270,13 @@ export default function Teachers() {
             className={`${styles.teacherDetailContainer} ${
               isChanging ? styles.fadeTransition : ""
             }`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
           >
-            <TeacherDetail teacher={teachersData[activeTeacher]} />
+            {teachers.length > 0 && (
+              <TeacherDetail
+                teacher={teachers[activeTeacher]}
+                metricLabels={metricLabels}
+              />
+            )}
           </div>
         </div>
       </div>
