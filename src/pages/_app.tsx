@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SidebarProvider } from "@/contexts/SidebarContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
+import useWebDataStore from "@/store/useWebDataStore";
+import Loader from "@/components/Loader";
 
 // import function to register Swiper custom elements
 import { register } from "swiper/element/bundle";
@@ -12,12 +14,16 @@ import { register } from "swiper/element/bundle";
 register();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const loading = useWebDataStore((state) => state.loading);
+  const fetchWebData = useWebDataStore((state) => state.fetchWebData);
+
   useEffect(() => {
-    const data = {
-      theme: "dark",
-    };
-    localStorage.setItem("theme", JSON.stringify(data));
-  }, []);
+    fetchWebData();
+  }, [fetchWebData]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <ThemeProvider>

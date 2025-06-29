@@ -87,13 +87,13 @@
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 80px;
+  width: 100px;
   text-align: center;
   margin-bottom: 20px;
+  min-height: 150px;
 }
 
 .teacherAvatar.active {
-  width: 100px;
 }
 
 .avatarWrapper {

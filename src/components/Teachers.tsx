@@ -123,7 +123,7 @@ const TeacherDetail: React.FC<TeacherDetailProps> = ({
 export default function Teachers() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
   const [activeTeacher, setActiveTeacher] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
@@ -131,26 +131,32 @@ export default function Teachers() {
 
   // Get teachers from web data
   const teachers =
-    webData?.web_teachers?.map((item) => ({
-      id: item.teacher_id,
-      name: item.teacher.name,
-      subtitle: item.teacher.surname,
-      about: getLocalizedText(
-        item.teacher.about_uz,
-        item.teacher.about_en,
-        language
-      ),
-      overallScore: item.teacher.overall.toString(),
-      scoreDisplay: item.teacher.overall.toString(),
-      yearsExperience: item.teacher.experience.toString(),
-      studentsCount: item.teacher.students.toString(),
-      quote: getLocalizedText(
-        item.teacher.quote_uz,
-        item.teacher.quote_en,
-        language
-      ),
-      image: item.teacher.image,
-    })) || [];
+    webData?.web_teachers?.map((item) => {
+      const score = item.teacher.overall;
+      const formattedScore =
+        score % 1 === 0 ? score.toFixed(1) : score.toString();
+
+      return {
+        id: item.teacher_id,
+        name: item.teacher.name,
+        subtitle: item.teacher.surname,
+        about: getLocalizedText(
+          item.teacher.about_uz,
+          item.teacher.about_en,
+          language
+        ),
+        overallScore: formattedScore,
+        scoreDisplay: formattedScore,
+        yearsExperience: item.teacher.experience.toString(),
+        studentsCount: item.teacher.students.toString(),
+        quote: getLocalizedText(
+          item.teacher.quote_uz,
+          item.teacher.quote_en,
+          language
+        ),
+        image: item.teacher.image,
+      };
+    }) || [];
 
   // Get localized section title
   const sectionTitle =
@@ -172,6 +178,10 @@ export default function Teachers() {
 
   // Handle auto-rotation
   useEffect(() => {
+    if (teachers.length === 0) {
+      return;
+    }
+
     const rotationInterval = setInterval(() => {
       if (!isPaused) {
         handleTeacherChange((prevIndex) =>
@@ -181,7 +191,7 @@ export default function Teachers() {
     }, 5000);
 
     return () => clearInterval(rotationInterval);
-  }, [isPaused]);
+  }, [isPaused, teachers.length]);
 
   // Reset pause after inactivity
   const resetPauseTimer = () => {
@@ -267,11 +277,11 @@ export default function Teachers() {
           </div>
 
           <div
-            className={`${styles.teacherDetailContainer} ${
-              isChanging ? styles.fadeTransition : ""
+            className={`${styles.teacherDetailWrapper} ${
+              isChanging ? styles.changing : ""
             }`}
           >
-            {teachers.length > 0 && (
+            {teachers.length > 0 && teachers[activeTeacher] && (
               <TeacherDetail
                 teacher={teachers[activeTeacher]}
                 metricLabels={metricLabels}

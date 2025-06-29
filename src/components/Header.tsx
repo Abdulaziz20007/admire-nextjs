@@ -8,7 +8,7 @@ import styles from "./Header.module.scss";
 export default function Header() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
 
   // Smooth scroll function (similar to navbar implementation)
   const scrollToSection = (sectionId: string) => {

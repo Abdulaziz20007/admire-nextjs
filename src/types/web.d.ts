@@ -58,12 +58,12 @@ export interface Media {
 
 export interface WebMedia {
   id: number;
-  title_uz: string;
-  title_en: string;
-  alt_uz: string;
-  alt_en: string;
-  category_uz: string;
-  category_en: string;
+  title_uz?: string;
+  title_en?: string;
+  alt_uz?: string;
+  alt_en?: string;
+  category_uz?: string;
+  category_en?: string;
   order: number;
   size: string;
   web_id: number;

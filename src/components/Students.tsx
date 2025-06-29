@@ -361,7 +361,7 @@ const StudentCard = ({ studentItem, language }: any) => {
 export default function Students() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const sectionTitle =

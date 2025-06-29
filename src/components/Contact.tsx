@@ -15,7 +15,7 @@ type SubmitStatus = null | "sending" | "success";
 export default function Contact() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",

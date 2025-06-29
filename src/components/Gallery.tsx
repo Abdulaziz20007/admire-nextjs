@@ -8,27 +8,35 @@ import styles from "./Gallery.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { A11y } from "swiper/modules";
+import type { Swiper as SwiperCore } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";
 
 // Simplified card renderer component
-const GalleryCard = ({ item }: { item: any }) => {
+const GalleryCard = ({
+  item,
+  isPlaying,
+  onTogglePlay,
+  registerVideoRef,
+}: {
+  item: any;
+  isPlaying: boolean;
+  onTogglePlay: () => void;
+  registerVideoRef: (
+    id: string,
+    ref: React.RefObject<HTMLVideoElement>
+  ) => void;
+}) => {
   const cardSizeClass = item.size === "1x2" ? styles.large : styles.small;
-  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
+  React.useEffect(() => {
+    if (item.media.is_video) {
+      registerVideoRef(item.id, videoRef as React.RefObject<HTMLVideoElement>);
     }
-    setIsPlaying(!isPlaying);
-  };
+  }, [item.id, item.media.is_video, registerVideoRef]);
 
   const handleVideoEnd = () => {
     if (!videoRef.current) return;
@@ -48,12 +56,12 @@ const GalleryCard = ({ item }: { item: any }) => {
             muted
             loop
             onEnded={handleVideoEnd}
-            onClick={togglePlay}
+            onClick={onTogglePlay}
           />
           {!isPlaying && (
             <button
               className={styles.playButton}
-              onClick={togglePlay}
+              onClick={onTogglePlay}
               aria-label="Play video"
             >
               <svg
@@ -76,7 +84,41 @@ const GalleryCard = ({ item }: { item: any }) => {
 export default function Gallery() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
+  const swiperRef = useRef<{ swiper: SwiperCore }>(null);
+  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
+  const videoRefs = useRef(
+    new Map<string, React.RefObject<HTMLVideoElement>>()
+  );
+
+  const registerVideoRef = (
+    id: string,
+    ref: React.RefObject<HTMLVideoElement>
+  ) => {
+    videoRefs.current.set(id, ref);
+  };
+
+  const handleTogglePlay = (id: string) => {
+    const isCurrentlyPlaying = playingVideoId === id;
+    const swiperInstance = swiperRef.current?.swiper;
+
+    videoRefs.current.forEach((ref, videoId) => {
+      if (id !== videoId) {
+        ref.current?.pause();
+      }
+    });
+
+    if (isCurrentlyPlaying) {
+      setPlayingVideoId(null);
+      swiperInstance?.autoplay.start();
+      videoRefs.current.get(id)?.current?.pause();
+    } else {
+      setPlayingVideoId(id);
+      swiperInstance?.autoplay.stop();
+      const videoToPlay = videoRefs.current.get(id);
+      videoToPlay?.current?.play();
+    }
+  };
 
   const galleryTitle = language === "uz" ? "Galereya" : "Gallery";
   const sectionDescription = webData
@@ -116,6 +158,7 @@ export default function Gallery() {
       <div className={styles.gallerySwiper}>
         <div className={styles.swiperWrapper}>
           <Swiper
+            ref={swiperRef}
             modules={[A11y, Autoplay]}
             slidesPerView={1}
             spaceBetween={20}
@@ -148,11 +191,26 @@ export default function Gallery() {
                 <SwiperSlide key={key}>
                   {Array.isArray(item) ? (
                     <div className={styles.galleryColumn}>
-                      <GalleryCard item={item[0]} />
-                      <GalleryCard item={item[1]} />
+                      <GalleryCard
+                        item={item[0]}
+                        isPlaying={playingVideoId === item[0].id}
+                        onTogglePlay={() => handleTogglePlay(item[0].id)}
+                        registerVideoRef={registerVideoRef}
+                      />
+                      <GalleryCard
+                        item={item[1]}
+                        isPlaying={playingVideoId === item[1].id}
+                        onTogglePlay={() => handleTogglePlay(item[1].id)}
+                        registerVideoRef={registerVideoRef}
+                      />
                     </div>
                   ) : (
-                    <GalleryCard item={item} />
+                    <GalleryCard
+                      item={item}
+                      isPlaying={playingVideoId === item.id}
+                      onTogglePlay={() => handleTogglePlay(item.id)}
+                      registerVideoRef={registerVideoRef}
+                    />
                   )}
                 </SwiperSlide>
               );

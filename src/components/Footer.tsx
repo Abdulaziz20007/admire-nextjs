@@ -190,7 +190,7 @@ const getSocialIcon = (platform: string) => {
 export default function Footer() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
   const currentYear = new Date().getFullYear();
 
   // Get localized footer tagline

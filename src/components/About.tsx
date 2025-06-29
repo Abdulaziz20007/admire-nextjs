@@ -18,7 +18,7 @@ const StatCard = ({ count, label }: { count: string; label: string }) => {
 export default function About() {
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const { webData } = useWebDataStore();
+  const webData = useWebDataStore((state) => state.webData);
 
   // Localized labels
   const sectionTitle = language === "uz" ? "Admire haqida" : "About Admire";

@@ -24,8 +24,7 @@
     --text-dark-muted: #6b7280;
 
     .flipCardBack {
-      background-color: rgba(229, 231, 235, 0.6);
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
     .scoreItem,
@@ -38,14 +37,20 @@
       background-color: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(1px);
       -webkit-backdrop-filter: blur(1px);
-      color: #fff;
-
-      .profileTitle {
-        color: rgba(255, 255, 255, 0.85);
-      }
+      color: var(--text-muted);
 
       .profileName {
-        color: #fff;
+        color: var(--text-light);
+      }
+      .profileTitle {
+        color: var(--indigo-600);
+      }
+      .scoreDisplay .score {
+        color: var(--text-light);
+      }
+      .cefrBadge {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: var(--text-light);
       }
     }
   }
