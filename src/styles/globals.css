@@ -1,7 +1,5 @@
-/* Import custom fonts */
 @import url("../fonts/fonts.css");
 
-/* Reset and base styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,19 +32,15 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Global focus outline management */
-/* Remove focus outlines for mouse/touch interactions while preserving keyboard accessibility */
 *:focus {
   outline: none;
 }
 
-/* Show focus outlines only for keyboard navigation */
 *:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Ensure buttons and interactive elements follow the same pattern */
 button:focus {
   outline: none;
 }
@@ -74,7 +68,6 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
-/* For browsers that don't support :focus-visible, provide fallback */
 @supports not selector(:focus-visible) {
   *:focus {
     outline: 2px solid var(--primary);
@@ -85,22 +78,18 @@ input:focus-visible {
 :root {
   --max-width: 1200px;
 
-  /* Standardized Section Spacing System */
   --section-padding-desktop: 8rem;
   --section-padding-tablet: 6rem;
   --section-padding-mobile: 4rem;
   --section-padding-small: 3rem;
 
-  /* Component-specific spacing overrides */
   --header-min-height: 100vh;
   --footer-padding-top: 4rem;
   --footer-padding-bottom: 1.5rem;
 
-  /* Content wrapper spacing */
   --content-padding-x: 1rem;
   --content-padding-x-desktop: 2rem;
 
-  /* Light theme colors */
   --color-divider: #e8edf5;
   --color-surface: #ffffff;
   --text-primary: #1f2937;
@@ -116,7 +105,6 @@ input:focus-visible {
   --particle-glow: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme */
 [data-theme="dark"] {
   --color-divider: #2d3a5c;
   --color-surface: #172442;
@@ -133,7 +121,6 @@ input:focus-visible {
   --particle-glow: rgba(255, 255, 255, 0.2);
 }
 
-/* System preference fallback */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --color-divider: #2d3a5c;
@@ -162,7 +149,7 @@ input:focus-visible {
 
 .section {
   padding: var(--section-padding-mobile) 0;
-  scroll-margin-top: 5rem; /* offset for sticky nav */
+  scroll-margin-top: 5rem;
 }
 
 @media (min-width: 480px) {
