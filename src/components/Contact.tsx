@@ -156,10 +156,6 @@ export default function Contact() {
               <div className={styles.flipCard}>
                 <div className={styles.flipCardFront}>
                   <div className={styles.contactFormContainer}>
-                    <h3 className={styles.contactTitle}>
-                      {contactData.contactTitle}
-                    </h3>
-
                     {submitStatus === "success" ? (
                       <div className={styles.formSuccessMessage}>
                         {contactData.formSuccess}
