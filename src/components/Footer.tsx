@@ -248,9 +248,9 @@ export default function Footer() {
       title: language === "uz" ? "Ijtimoiy tarmoqlar" : "Social Media",
       links:
         webData?.web_socials?.map((item) => ({
-          platform: item.social.name.toLowerCase(),
           url: item.social.url,
           title: item.social.name,
+          iconUrl: item.social.icon.url,
         })) || [],
     },
     copyright: {
@@ -347,7 +347,12 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {getSocialIcon(social.platform)}
+                  <img
+                    src={social.iconUrl}
+                    alt={social.title}
+                    width={18}
+                    height={18}
+                  />
                 </a>
               ))}
             </div>

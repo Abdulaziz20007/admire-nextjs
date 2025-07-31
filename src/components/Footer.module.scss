@@ -187,6 +187,11 @@
   text-decoration: none;
 }
 
+.socialIcon img {
+  width: 18px;
+  height: 18px;
+}
+
 .socialIcon:hover {
   background-color: #166fe3;
   transform: translateY(-3px);

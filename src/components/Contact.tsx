@@ -8,6 +8,7 @@ import styles from "./Contact.module.scss";
 interface FormData {
   name: string;
   phone: string;
+  message: string;
 }
 
 type SubmitStatus = null | "sending" | "success";
@@ -20,6 +21,7 @@ export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
+    message: "",
   });
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
   const [showAddress, setShowAddress] = useState(false);
@@ -34,6 +36,9 @@ export default function Contact() {
       language === "uz" ? "Ismingizni kiriting" : "Enter your name",
     phoneLabel: language === "uz" ? "Telefon raqamingiz" : "Your Phone Number",
     phonePlaceholder: "+998 XX XXX XX XX",
+    messageLabel: language === "uz" ? "Xabaringiz" : "Your Message",
+    messagePlaceholder:
+      language === "uz" ? "Xabaringizni kiriting" : "Enter your message",
     submit: language === "uz" ? "Xabar yuborish" : "Send Message",
     sending: language === "uz" ? "Yuborilmoqda..." : "Sending...",
     formSuccess:
@@ -64,7 +69,9 @@ export default function Contact() {
       ?.map((item) => item.phone.phone)
       .filter((phone) => phone !== mainPhone) || [];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -83,6 +90,7 @@ export default function Contact() {
       setFormData({
         name: "",
         phone: "",
+        message: "",
       });
 
       // Reset status after showing success message
@@ -186,6 +194,21 @@ export default function Contact() {
                             onChange={handleChange}
                             required
                             placeholder={contactData.phonePlaceholder}
+                          />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                          <label htmlFor="message">
+                            {contactData.messageLabel}
+                          </label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                            placeholder={contactData.messagePlaceholder}
+                            rows={4}
                           />
                         </div>
 

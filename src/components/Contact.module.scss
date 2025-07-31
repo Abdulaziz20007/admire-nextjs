@@ -310,7 +310,26 @@
   transition: all 0.3s ease;
 }
 
+/* Textarea styling matches input styling */
+.formGroup textarea {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  resize: vertical;
+  min-height: 120px;
+}
+
 .locationSection.light .formGroup input {
+  border: 1px solid rgba(22, 111, 227, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+  color: #031040;
+}
+
+.locationSection.light .formGroup textarea {
   border: 1px solid rgba(22, 111, 227, 0.15);
   background: rgba(255, 255, 255, 0.5);
   color: #031040;
