@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import useWebDataStore from "@/store/useWebDataStore";
@@ -119,6 +120,7 @@ export default function Contact() {
       }
 
       // success
+      toast.success(contactData.formSuccess);
       setSubmitStatus("success");
       setFormData({ name: "", phone: "", message: "" });
 
@@ -129,7 +131,7 @@ export default function Contact() {
     } catch (error) {
       console.error(error);
       setSubmitStatus(null);
-      alert("Failed to send message. Please try again later.");
+      toast.error("Failed to send message. Please try again later.");
     }
   };
 

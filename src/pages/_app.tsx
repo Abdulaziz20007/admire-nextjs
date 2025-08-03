@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 import useWebDataStore from "@/store/useWebDataStore";
 import Loader from "@/components/Loader";
+import { Toaster } from "sonner";
 
 // import function to register Swiper custom elements
 import { register } from "swiper/element/bundle";
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <LanguageProvider>
         <SidebarProvider>
           <Component {...pageProps} />
+          <Toaster richColors position="top-right" />
         </SidebarProvider>
       </LanguageProvider>
     </ThemeProvider>
