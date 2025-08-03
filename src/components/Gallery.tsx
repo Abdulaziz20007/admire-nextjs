@@ -53,7 +53,6 @@ const GalleryCard = ({
             src={item.media.url}
             className={styles.media}
             controls={isPlaying}
-            loop
             onEnded={handleVideoEnd}
             onClick={onTogglePlay}
           />

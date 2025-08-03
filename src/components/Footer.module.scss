@@ -190,6 +190,14 @@
 .socialIcon img {
   width: 18px;
   height: 18px;
+  /* Make the icon appear white regardless of original colors */
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+/* Ensure the icon stays white when hovered */
+.socialIcon:hover img {
+  filter: brightness(0) invert(1);
 }
 
 .socialIcon:hover {
