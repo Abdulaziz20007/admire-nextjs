@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { WebData } from "@/types/web";
 import axios from "axios";
-import data from "../../public/data.json";
 
 interface WebDataState {
   webData: WebData | null;
@@ -26,39 +25,22 @@ const useWebDataStore = create<WebDataState>((set) => ({
   fetchWebData: async () => {
     set({ loading: true, error: null });
 
-    const fallbackData = sortWebData(data as WebData);
-
-    const apiFetch = (async () => {
+    try {
       const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
       if (!baseURL) {
         throw new Error("Base URL is not configured.");
       }
 
       const response = await axios.post<WebData>(baseURL);
-
       if (response.status !== 201 || !response.data) {
         throw new Error("Invalid API response.");
       }
 
-      return sortWebData(response.data);
-    })();
-
-    const timer = new Promise<WebData>((resolve) =>
-      setTimeout(() => resolve(fallbackData), 500)
-    );
-
-    try {
-      const result = await Promise.race([apiFetch, timer]);
-
-      if (result === fallbackData) {
-        console.log("API took too long, using fallback data.");
-      }
-
+      const result = sortWebData(response.data);
       set({ webData: result, loading: false });
     } catch (error) {
-      console.error("API fetch failed, using fallback data:", error);
-      set({ webData: fallbackData, loading: false, error: String(error) });
+      console.error("Failed to fetch web data:", error);
+      set({ webData: null, loading: false, error: String(error) });
     }
   },
 }));
