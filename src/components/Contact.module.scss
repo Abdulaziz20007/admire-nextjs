@@ -127,7 +127,7 @@
 }
 
 .toggleBtn {
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1rem;
   border: none;
   background: rgba(20, 30, 50, 0.2);
   color: rgba(255, 255, 255, 0.7);
@@ -323,6 +323,39 @@
   min-height: 120px;
 }
 
+/* Phone number input group */
+.phoneInputGroup {
+  display: flex;
+  align-items: center;
+  max-width: 260px;
+  width: 100%;
+}
+
+.phonePrefix {
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: none;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 1.1rem;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.phoneInputGroup input {
+  width: 100%;
+  flex: 1;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Light theme overrides */
+.locationSection.light .phonePrefix {
+  border: 1px solid rgba(22, 111, 227, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+  color: #031040;
+}
+
 .locationSection.light .formGroup input {
   border: 1px solid rgba(22, 111, 227, 0.15);
   background: rgba(255, 255, 255, 0.5);
@@ -443,7 +476,7 @@
 
 .addressImage {
   width: 100%;
-  height: 40%;
+  height: 30%;
   overflow: hidden;
 }
 
@@ -586,7 +619,7 @@
   }
 
   .toggleBtn {
-    padding: 0.7rem 1.2rem;
+    padding: 0.45rem 0.9rem;
     font-size: 1.05rem; // Increased from 0.95rem for better readability on tablet
   }
 
@@ -642,7 +675,7 @@
   }
 
   .toggleBtn {
-    padding: 0.6rem 1rem;
+    padding: 0.4rem 0.8rem;
     font-size: 1rem; // Increased from 0.9rem for better readability on mobile
   }
 

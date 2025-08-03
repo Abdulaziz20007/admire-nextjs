@@ -35,7 +35,7 @@ export default function Contact() {
     namePlaceholder:
       language === "uz" ? "Ismingizni kiriting" : "Enter your name",
     phoneLabel: language === "uz" ? "Telefon raqamingiz" : "Your Phone Number",
-    phonePlaceholder: "+998 XX XXX XX XX",
+    phonePlaceholder: "XX XXX XX XX",
     messageLabel: language === "uz" ? "Xabaringiz" : "Your Message",
     messagePlaceholder:
       language === "uz" ? "Xabaringizni kiriting" : "Enter your message",
@@ -73,29 +73,64 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    if (name === "phone") {
+      // Accept only digits and format as "xx xxx xx xx"
+      const digits = value.replace(/\D/g, "").slice(0, 9);
+
+      const part1 = digits.slice(0, 2);
+      const part2 = digits.slice(2, 5);
+      const part3 = digits.slice(5, 7);
+      const part4 = digits.slice(7, 9);
+
+      const formatted = [part1, part2, part3, part4].filter(Boolean).join(" ");
+
+      setFormData((prev) => ({ ...prev, phone: formatted }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitStatus("sending");
 
-    setTimeout(() => {
-      setSubmitStatus("success");
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        phone: "",
-        message: "",
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        phone: `+998${formData.phone.replace(/\s/g, "")}`, // remove spaces and prepend country code
+        message: formData.message.trim(),
+      };
+
+      const apiBase = process.env.NEXT_PUBLIC_BASE_URL ?? ""; // fallback to same-origin
+      const response = await fetch(`${apiBase}/message`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
-      // Reset status after showing success message
-      setTimeout(() => setSubmitStatus(null), 3000);
-    }, 1000);
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      // success
+      setSubmitStatus("success");
+      setFormData({ name: "", phone: "", message: "" });
+
+      setTimeout(() => {
+        setSubmitStatus(null);
+        setShowAddress(true);
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus(null);
+      alert("Failed to send message. Please try again later.");
+    }
   };
 
   const toggleView = (isAddress: boolean) => {
@@ -182,15 +217,21 @@ export default function Contact() {
                           <label htmlFor="phone">
                             {contactData.phoneLabel}
                           </label>
-                          <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                            placeholder={contactData.phonePlaceholder}
-                          />
+                          <div className={styles.phoneInputGroup}>
+                            <span className={styles.phonePrefix}>+998</span>
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleChange}
+                              required
+                              placeholder={contactData.phonePlaceholder}
+                              pattern="[0-9]{2} [0-9]{3} [0-9]{2} [0-9]{2}"
+                              maxLength={12}
+                              inputMode="numeric"
+                            />
+                          </div>
                         </div>
 
                         <div className={styles.formGroup}>
