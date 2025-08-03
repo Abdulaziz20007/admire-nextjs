@@ -50,7 +50,54 @@ const useWebDataStore = create<WebDataState>((set) => ({
         ? (response.data[0] as WebData)
         : (response.data as WebData);
 
-      const result = sortWebData(payload);
+      let result = sortWebData(payload);
+
+      // Fallback: if media / students / teachers / socials are missing, load static JSON from /data.json
+      const needsFallback =
+        !result.web_media ||
+        result.web_media.length === 0 ||
+        !result.web_students ||
+        result.web_students.length === 0 ||
+        !result.web_teachers ||
+        result.web_teachers.length === 0 ||
+        !result.web_socials ||
+        result.web_socials.length === 0;
+
+      if (needsFallback) {
+        try {
+          const staticRes = await axios.get<WebData>("/data.json");
+          if (
+            staticRes.status >= 200 &&
+            staticRes.status < 300 &&
+            staticRes.data
+          ) {
+            // merge arrays from static data if they're missing
+            const staticData = staticRes.data;
+            result = {
+              ...result,
+              web_media:
+                result.web_media && result.web_media.length > 0
+                  ? result.web_media
+                  : staticData.web_media,
+              web_students:
+                result.web_students && result.web_students.length > 0
+                  ? result.web_students
+                  : staticData.web_students,
+              web_teachers:
+                result.web_teachers && result.web_teachers.length > 0
+                  ? result.web_teachers
+                  : staticData.web_teachers,
+              web_socials:
+                result.web_socials && result.web_socials.length > 0
+                  ? result.web_socials
+                  : staticData.web_socials,
+            } as WebData;
+          }
+        } catch (e) {
+          console.warn("Failed to load static fallback data", e);
+        }
+      }
+
       set({ webData: result, loading: false });
     } catch (error) {
       console.error("Failed to fetch web data:", error);
