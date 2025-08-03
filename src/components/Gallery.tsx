@@ -19,11 +19,15 @@ const GalleryCard = ({
   item,
   isPlaying,
   onTogglePlay,
+  onVideoPause,
+  onVideoPlay,
   registerVideoRef,
 }: {
   item: any;
   isPlaying: boolean;
   onTogglePlay: () => void;
+  onVideoPause: () => void;
+  onVideoPlay: () => void;
   registerVideoRef: (
     id: string,
     ref: React.RefObject<HTMLVideoElement>
@@ -47,14 +51,15 @@ const GalleryCard = ({
   return (
     <div className={`${styles.galleryCard} ${cardSizeClass}`}>
       {item.media.is_video ? (
-        <div className={styles.videoContainer}>
+        <div className={styles.videoContainer} onClick={onTogglePlay}>
           <video
             ref={videoRef}
             src={item.media.url}
             className={styles.media}
             controls={isPlaying}
+            onPause={onVideoPause}
+            onPlay={onVideoPlay}
             onEnded={handleVideoEnd}
-            onClick={onTogglePlay}
           />
           {!isPlaying && (
             <button
@@ -98,23 +103,41 @@ export default function Gallery() {
 
   const handleTogglePlay = (id: string) => {
     const isCurrentlyPlaying = playingVideoId === id;
-    const swiperInstance = swiperRef.current?.swiper;
+    const targetVideo = videoRefs.current.get(id)?.current;
 
+    if (!targetVideo) return;
+
+    if (isCurrentlyPlaying) {
+      // Pause the current video; onPause handler will take care of state updates.
+      targetVideo.pause();
+    } else {
+      // Pause all other videos first
+      videoRefs.current.forEach((ref, videoId) => {
+        if (videoId !== id) {
+          ref.current?.pause();
+        }
+      });
+      // Play the selected video; onPlay handler will take care of state updates.
+      targetVideo.play();
+    }
+  };
+
+  // Keep the playing state in sync with the video element events
+  const handleVideoPlay = (id: string) => {
+    // Pause any other videos (safety check)
     videoRefs.current.forEach((ref, videoId) => {
-      if (id !== videoId) {
+      if (videoId !== id) {
         ref.current?.pause();
       }
     });
+    setPlayingVideoId(id);
+    swiperRef.current?.swiper?.autoplay.stop();
+  };
 
-    if (isCurrentlyPlaying) {
+  const handleVideoPause = (id: string) => {
+    if (playingVideoId === id) {
       setPlayingVideoId(null);
-      swiperInstance?.autoplay.start();
-      videoRefs.current.get(id)?.current?.pause();
-    } else {
-      setPlayingVideoId(id);
-      swiperInstance?.autoplay.stop();
-      const videoToPlay = videoRefs.current.get(id);
-      videoToPlay?.current?.play();
+      swiperRef.current?.swiper?.autoplay.start();
     }
   };
 
@@ -193,12 +216,16 @@ export default function Gallery() {
                         item={item[0]}
                         isPlaying={playingVideoId === item[0].id}
                         onTogglePlay={() => handleTogglePlay(item[0].id)}
+                        onVideoPause={() => handleVideoPause(item[0].id)}
+                        onVideoPlay={() => handleVideoPlay(item[0].id)}
                         registerVideoRef={registerVideoRef}
                       />
                       <GalleryCard
                         item={item[1]}
                         isPlaying={playingVideoId === item[1].id}
                         onTogglePlay={() => handleTogglePlay(item[1].id)}
+                        onVideoPause={() => handleVideoPause(item[1].id)}
+                        onVideoPlay={() => handleVideoPlay(item[1].id)}
                         registerVideoRef={registerVideoRef}
                       />
                     </div>
@@ -207,6 +234,8 @@ export default function Gallery() {
                       item={item}
                       isPlaying={playingVideoId === item.id}
                       onTogglePlay={() => handleTogglePlay(item.id)}
+                      onVideoPause={() => handleVideoPause(item.id)}
+                      onVideoPlay={() => handleVideoPlay(item.id)}
                       registerVideoRef={registerVideoRef}
                     />
                   )}

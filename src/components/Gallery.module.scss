@@ -105,6 +105,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Allow swiping even when video is playing by letting touch events pass through */
+  pointer-events: none;
 }
 
 // Video container and play button
