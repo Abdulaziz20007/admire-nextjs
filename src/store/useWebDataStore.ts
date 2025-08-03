@@ -12,10 +12,16 @@ interface WebDataState {
 const sortWebData = (data: WebData) => {
   return {
     ...data,
-    web_media: [...data.web_media].sort((a, b) => a.order - b.order),
-    web_students: [...data.web_students].sort((a, b) => a.order - b.order),
-    web_teachers: [...data.web_teachers].sort((a, b) => a.order - b.order),
-  };
+    web_media: data.web_media
+      ? [...data.web_media].sort((a, b) => a.order - b.order)
+      : [],
+    web_students: data.web_students
+      ? [...data.web_students].sort((a, b) => a.order - b.order)
+      : [],
+    web_teachers: data.web_teachers
+      ? [...data.web_teachers].sort((a, b) => a.order - b.order)
+      : [],
+  } as WebData;
 };
 
 const useWebDataStore = create<WebDataState>((set) => ({
@@ -31,9 +37,12 @@ const useWebDataStore = create<WebDataState>((set) => ({
         throw new Error("Base URL is not configured.");
       }
 
-      const response = await axios.post<WebData>(baseURL);
-      if (response.status !== 201 || !response.data) {
-        throw new Error("Invalid API response.");
+      // Use GET instead of POST to fetch the data
+      const response = await axios.get<WebData>(baseURL);
+
+      // Treat any 2xx status code as a successful response
+      if (response.status < 200 || response.status >= 300 || !response.data) {
+        throw new Error(`Unexpected API response. Status: ${response.status}`);
       }
 
       const result = sortWebData(response.data);
