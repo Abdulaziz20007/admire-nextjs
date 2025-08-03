@@ -37,8 +37,8 @@ const useWebDataStore = create<WebDataState>((set) => ({
         throw new Error("Base URL is not configured.");
       }
 
-      // Use GET instead of POST to fetch the data
-      const response = await axios.get<WebData>(baseURL);
+      // Make a POST request to fetch the data (the backend is implemented on POST)
+      const response = await axios.post<WebData>(baseURL);
 
       // Treat any 2xx status code as a successful response
       if (response.status < 200 || response.status >= 300 || !response.data) {
