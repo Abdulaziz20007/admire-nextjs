@@ -45,7 +45,7 @@ const useWebDataStore = create<WebDataState>((set) => ({
     })();
 
     const timer = new Promise<WebData>((resolve) =>
-      setTimeout(() => resolve(fallbackData), 500)
+      setTimeout(() => resolve(fallbackData), 1000)
     );
 
     try {
