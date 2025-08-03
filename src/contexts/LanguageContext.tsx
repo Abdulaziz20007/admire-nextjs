@@ -30,12 +30,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   const [language, setLanguageState] = useState<Language>("uz");
   const [mounted, setMounted] = useState(false);
 
-  // Initialize language from localStorage or browser preference
+  // Initialize language from localStorage; default to Uzbek if none saved
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language") as Language;
-    const browserLanguage = navigator.language.startsWith("uz") ? "uz" : "en";
 
-    const initialLanguage = savedLanguage || browserLanguage;
+    const initialLanguage: Language = savedLanguage || "uz";
     setLanguageState(initialLanguage);
     setMounted(true);
   }, []);
