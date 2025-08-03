@@ -52,7 +52,7 @@ const GalleryCard = ({
             ref={videoRef}
             src={item.media.url}
             className={styles.media}
-            controls={false}
+            controls={isPlaying}
             muted
             loop
             onEnded={handleVideoEnd}
