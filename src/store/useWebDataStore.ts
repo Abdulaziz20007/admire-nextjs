@@ -38,14 +38,19 @@ const useWebDataStore = create<WebDataState>((set) => ({
       }
 
       // Make a POST request to fetch the data (the backend is implemented on POST)
-      const response = await axios.post<WebData>(baseURL);
+      const response = await axios.post<WebData | WebData[]>(baseURL);
 
       // Treat any 2xx status code as a successful response
       if (response.status < 200 || response.status >= 300 || !response.data) {
         throw new Error(`Unexpected API response. Status: ${response.status}`);
       }
 
-      const result = sortWebData(response.data);
+      // The API sometimes wraps the payload in an array – unwrap if needed
+      const payload: WebData = Array.isArray(response.data)
+        ? (response.data[0] as WebData)
+        : (response.data as WebData);
+
+      const result = sortWebData(payload);
       set({ webData: result, loading: false });
     } catch (error) {
       console.error("Failed to fetch web data:", error);
