@@ -23,6 +23,15 @@
     --text-muted: #4b5563;
     --text-dark-muted: #6b7280;
 
+    // Make primary action button text white in light mode
+    .actionButton.primary {
+      color: #ffffff;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
     .flipCardBack {
       background-color: rgba(0, 0, 0, 0.05);
     }
