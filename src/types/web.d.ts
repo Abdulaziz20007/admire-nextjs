@@ -97,7 +97,7 @@ export interface Student {
   name: string;
   surname: string;
   image: string;
-  certificate_photo: string;
+  certificate_image: string;
   overall: number;
   listening: number;
   reading: number;

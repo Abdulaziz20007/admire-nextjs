@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import useWebDataStore from "@/store/useWebDataStore";
 import { getLocalizedText } from "@/utils/localization";
 import styles from "./Students.module.scss";
+import { createPortal } from "react-dom";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -337,23 +338,25 @@ const StudentCard = ({ studentItem, language }: any) => {
       </div>
 
       {/* Modal */}
-      <div
-        className={`${styles.modal} ${isModalOpen ? "" : styles.hidden}`}
-        onClick={closeModal}
-      >
-        <div
-          className={styles.modalContent}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <img
-            src={student.certificate_photo}
-            alt={`${student.name} ${student.surname} IELTS Certificate`}
-          />
-          <button className={styles.modalCloseButton} onClick={closeModal}>
-            &times;
-          </button>
-        </div>
-      </div>
+      {isModalOpen &&
+        typeof window !== "undefined" &&
+        createPortal(
+          <div className={styles.modal} onClick={closeModal}>
+            <div
+              className={styles.modalContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={student.certificate_image}
+                alt={`${student.name} ${student.surname} IELTS Certificate`}
+              />
+              <button className={styles.modalCloseButton} onClick={closeModal}>
+                &times;
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   );
 };
